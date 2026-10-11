@@ -177,11 +177,11 @@ export default function SearchOverlay({ username, open, onOpenChange }: SearchOv
       aria-label="Search"
     >
       <div
-        className="flex w-full max-w-[640px] flex-col overflow-hidden rounded-[20px] border-2 border-[#151515] bg-[#111111] text-[#fafafa]"
+        className="flex w-full max-w-[640px] flex-col overflow-hidden rounded-lg border-2 border-[#151515] bg-[#111111] text-[#fafafa]"
         style={{ animation: closing ? "menu-pop-out 0.14s ease both" : "menu-pop 0.23s cubic-bezier(0.16,1,0.3,1) both" }}
       >
         <div className="flex items-center gap-2 bg-[#121212] px-[11px] py-[10px]">
-          <div className="flex h-[38px] min-w-0 flex-1 items-center gap-2 rounded-[13px] bg-[#0c0c0c] px-[11px] transition-colors focus-within:bg-[#101010] hover:bg-[#101010]">
+          <div className="flex h-[38px] min-w-0 flex-1 items-center gap-2 rounded-md bg-[#0c0c0c] px-[11px] transition-colors focus-within:bg-[#101010] hover:bg-[#101010]">
             <V3Icon name="search" className="size-[19px] min-w-[19px] shrink-0 text-[#707070]" />
             <input
               ref={inputRef}
@@ -211,7 +211,7 @@ export default function SearchOverlay({ username, open, onOpenChange }: SearchOv
             type="button"
             onClick={close}
             aria-label="Close search"
-            className="grid size-9 min-w-9 place-content-center rounded-[11px] text-[#777777] transition hover:bg-[#1a1a1a] hover:text-[#fafafa]"
+            className="grid size-9 min-w-9 place-content-center rounded-md text-[#777777] transition hover:bg-[#1a1a1a] hover:text-[#fafafa]"
           >
             <V3Icon name="close" className="size-[22px]" />
           </button>
@@ -240,7 +240,7 @@ export default function SearchOverlay({ username, open, onOpenChange }: SearchOv
                         data-index={idx}
                         onMouseEnter={() => setActive(idx)}
                         onClick={() => activate(item)}
-                        className={`flex min-h-[60px] w-full items-center gap-3 rounded-[12px] border-2 px-3 py-2 text-left transition-all duration-150 ${
+                        className={`flex min-h-[60px] w-full items-center gap-3 rounded-md border-2 px-3 py-2 text-left transition-all duration-150 ${
                           isActive
                             ? "border-[#1c1c1c] bg-[#171717]"
                             : "border-transparent bg-transparent"
@@ -248,7 +248,7 @@ export default function SearchOverlay({ username, open, onOpenChange }: SearchOv
                       >
                         <span
                           className={`flex size-6 min-w-6 items-center justify-center ${
-                            isActive ? "text-[#d7a2e6]" : "text-[#a7a7a7]"
+                            isActive ? "text-pink-300" : "text-[#a7a7a7]"
                           }`}
                         >
                           <V3Icon name={item.icon} className="size-5" />
@@ -262,7 +262,7 @@ export default function SearchOverlay({ username, open, onOpenChange }: SearchOv
                           </small>
                         </span>
                         {item.badge ? (
-                          <span className="h-6 min-w-fit rounded-[7px] border border-[#7e2c8b4b] bg-[#7e2c8b25] px-2 text-[11px] font-bold leading-6 text-[#d7a2e6]">
+                          <span className="h-6 min-w-fit rounded-[7px] border border-pink-500/30 bg-pink-600/15 px-2 text-[11px] font-bold leading-6 text-pink-300">
                             {item.badge}
                           </span>
                         ) : null}

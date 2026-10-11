@@ -24,7 +24,7 @@ export function Range({
   onChange: (n: number) => void;
 }) {
   return (
-    <div className="group rounded-2xl border border-[#1b1b1b] bg-[#0d0d0d] p-5 transition-all duration-300 ease-out hover:border-white/20 hover:bg-[#0f0f0f]">
+    <div className="group rounded-lg border border-[#1b1b1b] bg-[#0d0d0d] p-5 transition-all duration-300 ease-out hover:border-white/20 hover:bg-[#0f0f0f]">
       <div className="mb-4 flex items-center justify-between gap-3">
         <p className="text-sm font-semibold text-white/60 transition-colors group-hover:text-white/80">{label}</p>
         <div className="flex items-center gap-3">

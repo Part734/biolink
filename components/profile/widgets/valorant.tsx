@@ -1,13 +1,22 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { WidgetTile, WidgetFrost } from "./tile";
+import { WidgetFrost } from "./tile";
 import { glassPanelStyle, type WidgetGlass } from "./glass";
 
 const shell =
-  "relative flex min-h-[120px] flex-col overflow-hidden rounded-2xl border border-white/[0.06] bg-[#151517] p-4 text-white";
+  "relative flex min-h-[120px] flex-col overflow-hidden rounded-xl border border-white/[0.06] bg-[#151517] p-4 text-white";
 
-const TILE = { tileColor: "#FF4655", glyph: "valorant", label: "Valorant" } as const;
+function WidgetLabel({ text }: { text: string }) {
+  return (
+    <div className="relative z-10 flex items-center gap-1.5">
+      <span className="h-1 w-1 shrink-0 rounded-full bg-white/40" />
+      <span className="text-[10px] font-bold uppercase tracking-[0.14em] text-white/40">
+        {text}
+      </span>
+    </div>
+  );
+}
 
 interface ValorantData {
   name: string;
@@ -103,14 +112,12 @@ export function ValorantWidget({
   return (
     <div className={shell} style={glassPanelStyle(glass)}>
       <WidgetFrost glass={glass} />
-      <div className="absolute right-3 top-3 z-20 opacity-90">
-        <WidgetTile template={TILE} size="h-6 w-6" rounded="rounded-lg" />
-      </div>
+      <WidgetLabel text={meta.length > 0 ? `Valorant · ${meta.join(" · ")}` : "Valorant"} />
       <div className="relative z-10 flex min-h-0 flex-1 flex-col">
         <div className="mt-auto flex items-center gap-2.5">
           <span
             aria-hidden="true"
-            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl text-lg font-black text-white"
+            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg text-lg font-black text-white"
             style={{ backgroundColor: "#FF4655" }}
           >
             V
@@ -121,7 +128,7 @@ export function ValorantWidget({
               <span className="text-white/35"> #{data.tag}</span>
             </p>
             <p className="mt-0.5 truncate text-[11px] text-white/45">
-              {meta.length > 0 ? meta.join(" · ") : "Valorant profile"}
+              Riot ID verified
             </p>
           </div>
         </div>

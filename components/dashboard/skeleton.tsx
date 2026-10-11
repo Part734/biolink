@@ -1,7 +1,7 @@
 "use client";
 
 export function Skeleton({ className = "" }: { className?: string }) {
-  return <div className={`animate-pulse rounded-[12px] bg-[#1c1c1c] ${className}`} />;
+  return <div className={`animate-pulse rounded-md bg-[#1c1c1c] ${className}`} />;
 }
 
 export function SkeletonRows({ rows = 3, className = "" }: { rows?: number; className?: string }) {

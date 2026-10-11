@@ -91,7 +91,7 @@ export default function Dropdown({
         aria-label={ariaLabel}
         className={
           buttonClassName ??
-          "flex min-h-[46px] w-full cursor-pointer items-center gap-3 rounded-[15px] border-2 border-transparent bg-[#0c0c0c] px-4 text-left text-[14px] font-medium text-[#eee] transition hover:border-[#222]"
+          "flex min-h-[46px] w-full cursor-pointer items-center gap-3 rounded-md border-2 border-transparent bg-[#0c0c0c] px-4 text-left text-[14px] font-medium text-[#eee] transition hover:border-[#222]"
         }
       >
         {icon}
@@ -101,7 +101,7 @@ export default function Dropdown({
         ? createPortal(
             <div
               ref={menuRef}
-              className="fixed z-[200] origin-top overflow-hidden rounded-[12px] border-2 border-[#1e1e1e] bg-[#0f0f0f] p-1.5"
+              className="fixed z-[200] origin-top overflow-hidden rounded-md border-2 border-[#1e1e1e] bg-[#0f0f0f] p-1.5"
               style={{
                 top: pos.top,
                 left: pos.left,

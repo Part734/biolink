@@ -18,8 +18,8 @@ import {
   badges,
 } from "@/lib/schema";
 import { headers } from "next/headers";
-import { getVisitorInfo } from "@/lib/analytics";
-import { and, eq, sql } from "drizzle-orm";
+import { enrichVisitorGeo, getVisitorInfo, viewCooldownCutoff } from "@/lib/analytics";
+import { and, eq, gte, sql } from "drizzle-orm";
 import { resolveColor, withAlpha } from "@/lib/color";
 import ProfileOverlay from "@/components/profile-overlay";
 import TiltCard from "@/components/tilt-card";
@@ -114,18 +114,44 @@ export default async function UserProfilePage(
 
   if (!previewSnap) {
     try {
-      const visitor = getVisitorInfo(await headers());
-      await db
-        .insert(pageViews)
-        .values({
-          userId: user.id,
-          ip: visitor.ip,
-          device: visitor.device,
-          country: visitor.country,
-          referrer: visitor.referrer,
-          userAgent: visitor.userAgent,
-        })
-        .execute();
+      const visitor = await enrichVisitorGeo(getVisitorInfo(await headers()));
+      // Cooldown: one counted view per IP per profile every N minutes.
+      const cutoff = viewCooldownCutoff();
+      const [recent] = await db
+        .select({ id: pageViews.id })
+        .from(pageViews)
+        .where(
+          and(
+            eq(pageViews.userId, user.id),
+            eq(pageViews.ip, visitor.ip),
+            gte(pageViews.createdAt, cutoff)
+          )
+        )
+        .limit(1)
+        .catch(() => [] as Array<{ id: string }>);
+      if (!recent) {
+        await db
+          .insert(pageViews)
+          .values({
+            userId: user.id,
+            ip: visitor.ip,
+            device: visitor.device,
+            country: visitor.country,
+            city: visitor.city,
+            latitude: visitor.latitude == null ? null : String(visitor.latitude),
+            longitude: visitor.longitude == null ? null : String(visitor.longitude),
+            referrer: visitor.referrer,
+            userAgent: visitor.userAgent,
+          })
+          .execute();
+        if (process.env.NODE_ENV !== "production") {
+          console.log(
+            `[views] ${username} <- ${visitor.ip} ${visitor.country}${visitor.city ? `/${visitor.city}` : ""}`
+          );
+        }
+      } else if (process.env.NODE_ENV !== "production") {
+        console.log(`[views] ${username} <- ${visitor.ip} skipped (cooldown)`);
+      }
     } catch {
       await db.insert(pageViews).values({ userId: user.id }).execute();
     }

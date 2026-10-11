@@ -5,11 +5,11 @@ import { createPortal } from "react-dom";
 
 /** Primary popup button — purple. */
 export const modalPrimaryBtn =
-  "shrink-0 cursor-pointer rounded-[12px] border-2 border-[#7e2c8b7c] bg-[#7e2c8b63] px-4 py-2.5 text-[15px] font-semibold text-white transition-all duration-200 hover:bg-[#7e2c8b7c] active:translate-y-[2px] disabled:cursor-not-allowed disabled:opacity-50";
+  "shrink-0 cursor-pointer rounded-md border border-pink-500/60 bg-pink-600 px-4 py-2.5 text-[15px] font-semibold text-white transition-all duration-200 hover:bg-pink-500 active:translate-y-[2px] disabled:cursor-not-allowed disabled:opacity-50";
 
 /** Secondary popup button — dark. */
 export const modalGhostBtn =
-  "shrink-0 cursor-pointer rounded-[12px] border-2 border-[#2a2a2a] bg-[#1a1a1a] px-4 py-2.5 text-[15px] font-semibold text-white transition-all duration-200 hover:border-[#3a3a3a] hover:bg-[#222222] active:translate-y-[2px] disabled:cursor-not-allowed disabled:opacity-50";
+  "shrink-0 cursor-pointer rounded-md border-2 border-[#2a2a2a] bg-[#1a1a1a] px-4 py-2.5 text-[15px] font-semibold text-white transition-all duration-200 hover:border-[#3a3a3a] hover:bg-[#222222] active:translate-y-[2px] disabled:cursor-not-allowed disabled:opacity-50";
 
 export default function Modal({
   open,
@@ -65,7 +65,7 @@ export default function Modal({
       }}
     >
       <div
-        className={`w-full ${maxWidth} transform-gpu rounded-[20px] border-2 border-[#151515] bg-[#111111] text-[#fafafa] transition-all duration-200 ${
+        className={`w-full ${maxWidth} transform-gpu rounded-lg border-2 border-[#1e1e1e] bg-[#111111] text-[#fafafa] transition-all duration-200 ${
           shown ? "translate-y-0 scale-100 opacity-100" : "translate-y-4 scale-95 opacity-0"
         }`}
         role="dialog"

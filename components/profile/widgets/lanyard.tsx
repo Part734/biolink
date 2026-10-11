@@ -1,13 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { WidgetTile, WidgetFrost } from "./tile";
+import { WidgetFrost } from "./tile";
 import { glassPanelStyle, type WidgetGlass } from "./glass";
 
 const shell =
-  "relative flex min-h-[120px] flex-col overflow-hidden rounded-2xl border border-white/[0.06] bg-[#151517] p-4 text-white";
-
-const TILE = { tileColor: "#5865F2", glyph: "discord", label: "Discord" } as const;
+  "relative flex min-h-[120px] flex-col overflow-hidden rounded-xl border border-white/[0.06] bg-[#151517] p-4 text-white";
 
 const statusColors: Record<string, string> = {
   online: "bg-emerald-400",
@@ -60,7 +58,7 @@ export function LanyardWidget({
     return (
       <div className={shell} style={glassPanelStyle(glass)}>
         <WidgetFrost glass={glass} />
-        <div className="relative z-10 flex min-h-0 flex-1 flex-col">
+        <div className="relative z-10 flex min-h-0 flex-0.80 flex-col" style={{ }}>
           <p className="mt-auto text-xs text-white/45">
             Add your Discord ID in the dashboard to turn this on.
           </p>
@@ -94,8 +92,11 @@ export function LanyardWidget({
   return (
     <div className={shell} style={glassPanelStyle(glass)}>
       <WidgetFrost glass={glass} />
-      <div className="absolute right-3 top-3 z-20 opacity-90">
-        <WidgetTile template={TILE} size="h-6 w-6" rounded="rounded-lg" />
+      <div className="relative z-10 flex items-center gap-1.5">
+        <span className={`h-1 w-1 shrink-0 rounded-full ${dot}`} />
+        <span className="text-[10px] font-bold uppercase tracking-[0.14em] text-white/40">
+          Discord · {data.status}
+        </span>
       </div>
       <div className="relative z-10 flex min-h-0 flex-1 flex-col">
         <div className="mt-auto flex items-center gap-2.5">

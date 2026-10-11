@@ -51,7 +51,7 @@ function UploadBox({
   };
 
   return (
-    <div className="group rounded-2xl border p-2 transition-all duration-300 ease-out border-[#1b1b1b] bg-[#0d0d0d] hover:border-white/20 hover:bg-[#111] hover:scale-[1.01]">
+    <div className="group rounded-lg border p-2 transition-all duration-300 ease-out border-[#1b1b1b] bg-[#0d0d0d] hover:border-white/20 hover:bg-[#111] hover:scale-[1.01]">
       <div className="relative p-4 pb-2">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
@@ -328,7 +328,7 @@ export default function MediaTab({
 
   return (
     <div className="space-y-8">
-      <div className="p-6 rounded-2xl border border-[#1b1b1b] bg-[#0d0d0d]">
+      <div className="p-6 rounded-lg border border-[#1b1b1b] bg-[#0d0d0d]">
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
           <UploadBox label="Avatar" current={avatar || null} type="avatar" onOpen={openUploadModal} onDelete={() => setAvatar("")} />
           <UploadBox label="Background" current={background || null} type="background" onOpen={openUploadModal} onDelete={() => setBackground("")} />
@@ -345,7 +345,7 @@ export default function MediaTab({
           <div onClick={closeUploadModal} className="absolute inset-0 bg-black/80" />
 
           <div
-            className={`relative w-full max-w-sm transform-gpu rounded-2xl border border-[#1b1b1b] bg-[#0d0d0d] p-5 transition-[transform,opacity] duration-250 ease-out will-change-transform ${
+            className={`relative w-full max-w-sm transform-gpu rounded-lg border border-[#1b1b1b] bg-[#0d0d0d] p-5 transition-[transform,opacity] duration-250 ease-out will-change-transform ${
               shown ? "translate-y-0 scale-100 opacity-100" : "translate-y-4 scale-95 opacity-0"
             }`}
           >

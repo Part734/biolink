@@ -69,6 +69,20 @@ const DEFAULT_RADIUS: Partial<Record<ElementKey, number>> = {
 const clamp = (value: number, min: number, max: number) =>
   Math.min(Math.max(value, min), max);
 
+/** Snap distance in px for alignment guides. */
+const SNAP_PX = 6;
+
+/** Pull a proposed center onto a target center when close enough. */
+function snapAxis(
+  proposed: number,
+  target: number
+): { value: number; snapped: boolean } {
+  if (Math.abs(proposed - target) <= SNAP_PX) {
+    return { value: target, snapped: true };
+  }
+  return { value: proposed, snapped: false };
+}
+
 /** Overlay box, in stage-relative pixels. */
 interface Box {
   x: number;
@@ -202,13 +216,13 @@ function cardInnerRect(card: HTMLElement) {
 
 /** The standard dashboard button look (matches the preset buttons). */
 const TOOL_BTN =
-  "flex items-center justify-center rounded-xl border px-3 py-3 text-sm transition-all duration-200 border-[#1b1b1b] bg-[#080808] text-white/40 hover:border-white/10 hover:text-white";
+  "flex items-center justify-center rounded-md border px-3 py-3 text-sm transition-all duration-200 border-[#1b1b1b] bg-[#080808] text-white/40 hover:border-white/10 hover:text-white";
 
 const MENU_BTN =
-  "flex items-center justify-center rounded-xl border px-3 py-3 text-sm transition-all duration-200 border-[#1b1b1b] bg-[#080808] text-white/40 hover:border-white/10 hover:text-white";
+  "flex items-center justify-center rounded-md border px-3 py-3 text-sm transition-all duration-200 border-[#1b1b1b] bg-[#080808] text-white/40 hover:border-white/10 hover:text-white";
 
 const MENU_BTN_ON =
-  "flex items-center justify-center rounded-xl border px-3 py-3 text-sm transition-all duration-200 border-pink-500/40 bg-pink-500/10 text-pink-400 hover:border-pink-400/60";
+  "flex items-center justify-center rounded-md border px-3 py-3 text-sm transition-all duration-200 border-pink-500/40 bg-pink-500/10 text-pink-400 hover:border-pink-400/60";
 
 function MenuSlider({
   label,
@@ -424,6 +438,16 @@ export default function LayoutEditor({
   const [boxes, setBoxes] = useState<Partial<Record<ElementKey, Box>>>({});
   const [cardBox, setCardBox] = useState<Box | null>(null);
   const [stageH, setStageH] = useState(650);
+  /** Live snap-guide positions in stage coords (null = hidden). */
+  const [guides, setGuides] = useState<{ x: number | null; y: number | null }>({
+    x: null,
+    y: null,
+  });
+  const [guidesOn, setGuidesOn] = useState(true);
+
+  const clearGuides = () => {
+    setGuides((prev) => (prev.x === null && prev.y === null ? prev : { x: null, y: null }));
+  };
 
   const measure = useCallback(() => {
     const stage = stageRef.current;
@@ -593,6 +617,7 @@ export default function LayoutEditor({
 
     setSelected(key);
     setMenu(null);
+    clearGuides();
   };
 
   const dragMove = (event: React.PointerEvent) => {
@@ -639,6 +664,25 @@ export default function LayoutEditor({
 
         allowX = clamp(stepDx, inner.left - rect.left, inner.right - rect.right);
         allowY = clamp(stepDy, inner.top - rect.top, inner.bottom - rect.bottom);
+
+        if (guidesOn && stage) {
+          // Snap the element center onto the card center + show guides.
+          const stageRect = stage.getBoundingClientRect();
+          const cardRect = card.getBoundingClientRect();
+          const cardCx = (cardRect.left + cardRect.right) / 2;
+          const cardCy = (cardRect.top + cardRect.bottom) / 2;
+          const nodeCx = (rect.left + rect.right) / 2;
+          const nodeCy = (rect.top + rect.bottom) / 2;
+          const sx = snapAxis(nodeCx + allowX, cardCx);
+          const sy = snapAxis(nodeCy + allowY, cardCy);
+          allowX = sx.value - nodeCx;
+          allowY = sy.value - nodeCy;
+          const gx = sx.snapped ? cardCx - stageRect.left + stage.scrollLeft : null;
+          const gy = sy.snapped ? cardCy - stageRect.top + stage.scrollTop : null;
+          setGuides((prev) => (prev.x === gx && prev.y === gy ? prev : { x: gx, y: gy }));
+        } else {
+          clearGuides();
+        }
       }
 
       if (allowX === 0 && allowY === 0) return;
@@ -682,6 +726,7 @@ export default function LayoutEditor({
   const endDrag = (event: React.PointerEvent) => {
     if (!dragRef.current) return;
     dragRef.current = null;
+    clearGuides();
 
     try {
       event.currentTarget.releasePointerCapture(event.pointerId);
@@ -751,6 +796,7 @@ export default function LayoutEditor({
 
     setSelected("card");
     setMenu(null);
+    clearGuides();
   };
 
   const cardMove = (event: React.PointerEvent) => {
@@ -763,9 +809,33 @@ export default function LayoutEditor({
     if (drag.mode === "move") {
       if (dx === 0 && dy === 0) return;
       // clamped so the card can never be dragged outside the page
+      let vx = clamp(dx, drag.minDx, drag.maxDx);
+      let vy = clamp(dy, drag.minDy, drag.maxDy);
+      if (guidesOn) {
+        // Snap the card center onto the stage center + show guides.
+        const stage = stageRef.current;
+        const card = stage?.querySelector<HTMLElement>("[data-card-root]");
+        if (stage && card) {
+          const sRect = stage.getBoundingClientRect();
+          const cRect = card.getBoundingClientRect();
+          const stageCx = sRect.left + sRect.width / 2;
+          const stageCy = sRect.top + sRect.height / 2;
+          const cardCx = (cRect.left + cRect.right) / 2;
+          const cardCy = (cRect.top + cRect.bottom) / 2;
+          const sx = snapAxis(cardCx + vx, stageCx);
+          const sy = snapAxis(cardCy + vy, stageCy);
+          vx = sx.value - cardCx;
+          vy = sy.value - cardCy;
+          const gx = sx.snapped ? stageCx - sRect.left + stage.scrollLeft : null;
+          const gy = sy.snapped ? stageCy - sRect.top + stage.scrollTop : null;
+          setGuides((prev) => (prev.x === gx && prev.y === gy ? prev : { x: gx, y: gy }));
+        }
+      } else {
+        clearGuides();
+      }
       patchCard({
-        x: clamp(Math.round(drag.x + clamp(dx, drag.minDx, drag.maxDx)), -1500, 1500),
-        y: clamp(Math.round(drag.y + clamp(dy, drag.minDy, drag.maxDy)), -1500, 1500),
+        x: clamp(Math.round(drag.x + vx), -1500, 1500),
+        y: clamp(Math.round(drag.y + vy), -1500, 1500),
       });
       return;
     }
@@ -796,6 +866,7 @@ export default function LayoutEditor({
   const endCardDrag = (event: React.PointerEvent) => {
     if (!cardDragRef.current) return;
     cardDragRef.current = null;
+    clearGuides();
 
     try {
       event.currentTarget.releasePointerCapture(event.pointerId);
@@ -1048,6 +1119,14 @@ export default function LayoutEditor({
                 Back in sequence
               </button>
             )}
+            <button
+              type="button"
+              title="Pin this element to the exact card center"
+              onClick={() => patchElement(key, { anchor: "middle-center", x: 0, y: 0 })}
+              className={MENU_BTN}
+            >
+              Center on card
+            </button>
             {key === "views" && element.anchor === "flow" && (
               <button
                 type="button"
@@ -1207,7 +1286,7 @@ export default function LayoutEditor({
   return (
     <div className="flex h-full min-h-0 flex-col gap-3">
       {/* ---------------- toolbar ---------------- */}
-      <div className="flex flex-wrap items-center gap-3 rounded-2xl border border-[#1b1b1b] bg-[#0d0d0d] px-4 py-3">
+      <div className="flex flex-wrap items-center gap-3 rounded-lg border border-[#1b1b1b] bg-[#0d0d0d] px-4 py-3">
         <button type="button" onClick={goBack} className={TOOL_BTN}>
           ← Back
         </button>
@@ -1215,11 +1294,20 @@ export default function LayoutEditor({
         <div className="min-w-0">
           <h1 className="text-base font-bold text-white">Layout editor</h1>
           <p className="text-[11px] text-white/40">
-            Drag anything to move it · corner handle to resize · right-click to edit
+            Drag to move · snaps to center lines · corner handle to resize · right-click to edit
           </p>
         </div>
 
         <div className="ml-auto flex flex-wrap items-center gap-2">
+          <button
+            type="button"
+            onClick={() => setGuidesOn((v) => !v)}
+            aria-pressed={guidesOn}
+            title="Show center lines and snap while dragging"
+            className={guidesOn ? MENU_BTN_ON : TOOL_BTN}
+          >
+            Guides {guidesOn ? "on" : "off"}
+          </button>
           <button type="button" onClick={resetAll} className={TOOL_BTN}>
             Reset all
           </button>
@@ -1240,7 +1328,7 @@ export default function LayoutEditor({
       {/* ---------------- stage ---------------- */}
       <div
         ref={stageRef}
-        className="relative min-h-0 flex-1 overflow-y-auto overflow-x-hidden rounded-2xl border border-[#1b1b1b] bg-[#0d0d0d]"
+        className="relative min-h-0 flex-1 overflow-y-auto overflow-x-hidden rounded-lg border border-[#1b1b1b] bg-[#0d0d0d]"
         onPointerDown={onStagePointerDown}
         onPointerMove={(event) => {
           if (cardDragRef.current) cardMove(event);
@@ -1265,6 +1353,42 @@ export default function LayoutEditor({
           editor
           feedback={feedback}
         />
+
+        {layout.enabled && cardBox && guidesOn && (
+          <>
+            {/* faint card center lines */}
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute top-0 z-[54] h-full w-px bg-pink-500/20"
+              style={{ left: cardBox.x + cardBox.w / 2, height: Math.max(stageH, cardBox.y + cardBox.h) }}
+            />
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute left-0 z-[54] h-px w-full bg-pink-500/20"
+              style={{ top: cardBox.y + cardBox.h / 2 }}
+            />
+          </>
+        )}
+
+        {layout.enabled && (guides.x != null || guides.y != null) && (
+          <>
+            {/* live snap guides */}
+            {guides.x != null && (
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute top-0 z-[58] w-px bg-pink-400 shadow-[0_0_8px_rgba(236,72,153,0.9)]"
+                style={{ left: guides.x, height: Math.max(stageH, (cardBox?.y ?? 0) + (cardBox?.h ?? 0)) }}
+              />
+            )}
+            {guides.y != null && (
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute left-0 z-[58] h-px w-full bg-pink-400 shadow-[0_0_8px_rgba(236,72,153,0.9)]"
+                style={{ top: guides.y }}
+              />
+            )}
+          </>
+        )}
 
         {layout.enabled && cardBox && (
           <>
@@ -1391,7 +1515,7 @@ export default function LayoutEditor({
             }}
           />
           <div
-            className="menu-pop fixed z-[95] w-60 overflow-y-auto rounded-2xl border border-[#1b1b1b] bg-[#0d0d0d] py-1"
+            className="menu-pop fixed z-[95] w-60 overflow-y-auto rounded-lg border border-[#1b1b1b] bg-[#0d0d0d] py-1"
             style={{
               left: menuLeft,
               top: menuTop,

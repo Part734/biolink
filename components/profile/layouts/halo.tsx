@@ -260,6 +260,15 @@ export function HaloCard({
     setPendingLink(null);
   };
 
+  /** Fire-and-forget click tracking — the anchor itself points at the destination. */
+  const trackClick = (endpoint: string) => {
+    try {
+      void fetch(endpoint, { method: "POST", keepalive: true, cache: "no-store" });
+    } catch {
+      /* tracking must never break navigation */
+    }
+  };
+
   const textColor = resolveColor(profile?.textColor, "#ffffff");
   const usernameHaloColor = resolveColor(profile?.usernameColor ?? profile?.textColor, "#ffffff");
   const badgeAccent = resolveColor(profile?.badgeColor, "#ffffff");
@@ -693,17 +702,18 @@ export function HaloCard({
                       label={getPlatformName(platform)}
                     >
                       <a
-                        href={preview ? social.url : `/api/social-click?id=${social.id}`}
+                        href={social.url}
                         target="_blank"
                         rel="noopener noreferrer"
                         aria-label={platform}
-                        onClick={(e) =>
-                          askLink(
-                            e,
-                            getPlatformName(platform),
-                            preview ? social.url : `/api/social-click?id=${social.id}`
-                          )
-                        }
+                        onAuxClick={() => {
+                          if (!preview) trackClick(`/api/social-click?id=${social.id}`);
+                        }}
+                        onClick={(e) => {
+                          if (!preview) trackClick(`/api/social-click?id=${social.id}`);
+                          if (preview || e.ctrlKey || e.metaKey || e.shiftKey) return;
+                          askLink(e, getPlatformName(platform), social.url);
+                        }}
                         className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg transition-all hover:scale-110"
                         style={{ color: socialAccent }}
                       >
@@ -750,16 +760,17 @@ export function HaloCard({
                     label={link.url || link.title}
                   >
                     <a
-                      href={preview ? "#" : `/api/click?id=${link.id}`}
+                      href={preview ? "#" : (link.url ?? "#")}
                       target={preview ? undefined : "_blank"}
                       rel="noopener noreferrer"
-                      onClick={(e) =>
-                        askLink(
-                          e,
-                          link.title,
-                          preview ? "#" : `/api/click?id=${link.id}`
-                        )
-                      }
+                      onAuxClick={() => {
+                        if (!preview) trackClick(`/api/click?id=${link.id}`);
+                      }}
+                      onClick={(e) => {
+                        if (!preview) trackClick(`/api/click?id=${link.id}`);
+                        if (preview || e.ctrlKey || e.metaKey || e.shiftKey) return;
+                        askLink(e, link.title, link.url ?? "#");
+                      }}
                       className="flex items-center justify-center gap-4 border border-white/10 bg-white/[0.06] px-5 py-3.5 font-medium transition hover:bg-white/10"
                       style={{
                         color: textColor,

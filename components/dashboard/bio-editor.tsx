@@ -45,7 +45,7 @@ export default function BioEditor({
   }
 
   return (
-    <div className="rounded-3xl border border-[#1b1b1b] bg-[#0d0d0d] p-6">
+    <div className="rounded-lg border border-[#1b1b1b] bg-[#0d0d0d] p-6">
       <div className="flex items-center gap-3 mb-4 text-white">
         <div className="w-8 h-8 rounded-lg bg-pink-500/10 text-pink-500 flex items-center justify-center shrink-0">
           <svg

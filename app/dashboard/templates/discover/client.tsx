@@ -81,7 +81,7 @@ function TemplateLivePreview({ data }: { data: CreatePreview }) {
     return () => ro.disconnect();
   }, []);
   return (
-    <div ref={wrapRef} className="overflow-hidden rounded-[15px] border-2 border-[#1e1e1e]" style={{ height: 260 }}>
+    <div ref={wrapRef} className="overflow-hidden rounded-lg border-2 border-[#1e1e1e]" style={{ height: 260 }}>
       <div style={{ width: 440, transform: `scale(${scale})`, transformOrigin: "top left" }}>
         <ProfileCard
           user={{ id: 0, username: "you" }}
@@ -347,7 +347,7 @@ export default function DiscoverClient({
 
   return (
     <div className="flex w-full min-w-0 flex-col gap-5">
-      <div className="rounded-[16px] border border-[#1a1a1a] bg-[#111111] p-5">
+      <div className="rounded-lg border border-[#1a1a1a] bg-[#111111] p-5">
         <h1 className="m-0 text-[20px] font-semibold text-[#f2f2f2]">
           Discover the perfect egirls.lol Template for your Profile
         </h1>
@@ -366,7 +366,7 @@ export default function DiscoverClient({
                 setTab(t.id);
                 setVisible(PAGE_SIZE);
               }}
-              className={`cursor-pointer rounded-[12px] border-2 px-3 py-2 text-[14px] font-medium transition ${
+              className={`cursor-pointer rounded-md border-2 px-3 py-2 text-[14px] font-medium transition ${
                 tab === t.id
                   ? "border-[#7e2c8b7c] bg-[#7e2c8b40] text-white"
                   : "border-[#1e1e1e] bg-[#111111] text-[#a1a1a1] hover:border-[#2a2a2a] hover:text-white"
@@ -379,7 +379,7 @@ export default function DiscoverClient({
         <button
           type="button"
           onClick={openCreate}
-          className="cursor-pointer rounded-[12px] border-2 border-[#7e2c8b7c] bg-[#7e2c8b63] px-4 py-2 text-[14px] font-semibold text-white transition hover:bg-[#7e2c8b7c] active:translate-y-[2px]"
+          className="cursor-pointer rounded-md border-2 border-pink-500/60 bg-pink-600 px-4 py-2 text-[14px] font-semibold text-white transition hover:bg-pink-500 active:translate-y-[2px]"
         >
           Create Template
         </button>
@@ -399,7 +399,7 @@ export default function DiscoverClient({
             placeholder="Explore community-created templates"
             autoComplete="off"
             spellCheck={false}
-            className="w-full rounded-[15px] border-2 border-transparent bg-[#0c0c0c] p-[10px_12px_10px_40px] text-[15px] text-[#eee] outline-none transition placeholder:text-[#555] hover:border-[#191919] focus:border-[#2a2a2a]"
+            className="w-full rounded-lg border-2 border-transparent bg-[#0c0c0c] p-[10px_12px_10px_40px] text-[15px] text-[#eee] outline-none transition placeholder:text-[#555] hover:border-[#191919] focus:border-pink-500/60"
           />
         </div>
         <div className="shrink-0 sm:w-[180px]">
@@ -417,7 +417,7 @@ export default function DiscoverClient({
                   setSort(s.id);
                   setSortOpen(false);
                 }}
-                className={`flex w-full cursor-pointer items-center rounded-[10px] px-3 py-2.5 text-left text-[14px] transition-colors ${
+                className={`flex w-full cursor-pointer items-center rounded-md px-3 py-2.5 text-left text-[14px] transition-colors ${
                   sort === s.id ? "font-medium text-white" : "text-[#dcdcdc] hover:bg-[#1b1b1b]"
                 }`}
               >
@@ -429,7 +429,7 @@ export default function DiscoverClient({
       </div>
 
       {shown.length === 0 ? (
-        <div className="rounded-[15px] border-2 border-[#1c1c1c] bg-[#111111] p-10 text-center">
+        <div className="rounded-lg border-2 border-[#1c1c1c] bg-[#111111] p-10 text-center">
           <p className="m-0 text-[16px] font-medium text-[#e6e6e6]">No templates found</p>
           <p className="m-0 mt-1 text-[13px] font-light text-[#8a8a8a]">
             {tab === "uploads" ? "Publish your first template with Create Template." : "Try a different search or filter."}
@@ -441,7 +441,7 @@ export default function DiscoverClient({
             const fav = favs.has(t.id);
             const displayName = t.ownerDisplayName || t.ownerUsername;
             return (
-              <div key={t.id} className="flex min-w-0 flex-col overflow-hidden rounded-[15px] border-2 border-[#1c1c1c] bg-[#111111]">
+              <div key={t.id} className="flex min-w-0 flex-col overflow-hidden rounded-lg border-2 border-[#1c1c1c] bg-[#111111]">
                 <div className="relative">
                   {t.previewUrl ? (
                     // eslint-disable-next-line @next/next/no-img-element
@@ -461,7 +461,7 @@ export default function DiscoverClient({
                     <StarIcon filled={fav} />
                   </button>
                   {t.premiumOnly ? (
-                    <span className="absolute left-2 top-2 rounded-full border border-[#7e2c8b7c] bg-[#7e2c8b63] px-2 py-0.5 text-[11px] font-semibold text-white">
+                    <span className="absolute left-2 top-2 rounded-full border border-pink-500/60 bg-pink-600 px-2 py-0.5 text-[11px] font-semibold text-white">
                       Premium
                     </span>
                   ) : null}
@@ -499,7 +499,7 @@ export default function DiscoverClient({
                     <button
                       type="button"
                       onClick={() => setConfirmTpl(t)}
-                      className="min-h-[40px] flex-1 cursor-pointer rounded-[12px] border-2 border-[#7e2c8b7c] bg-[#7e2c8b63] px-3 text-[14px] font-semibold text-white transition hover:bg-[#7e2c8b7c] active:translate-y-[2px]"
+                      className="min-h-[40px] flex-1 cursor-pointer rounded-md border-2 border-pink-500/60 bg-pink-600 px-3 text-[14px] font-semibold text-white transition hover:bg-pink-500 active:translate-y-[2px]"
                     >
                       Use Template
                     </button>
@@ -508,7 +508,7 @@ export default function DiscoverClient({
                       onClick={() => copyLink(t)}
                       aria-label="Copy template link"
                       title="Copy template link"
-                      className="grid size-10 shrink-0 cursor-pointer place-items-center rounded-[12px] border-2 border-[#222] bg-[#161616] text-[#c9c9c9] transition hover:border-[#3a3a3a] hover:text-white active:translate-y-[2px]"
+                      className="grid size-10 shrink-0 cursor-pointer place-items-center rounded-md border-2 border-[#222] bg-[#161616] text-[#c9c9c9] transition hover:border-[#3a3a3a] hover:text-white active:translate-y-[2px]"
                     >
                       <svg viewBox="0 0 256 256" fill="currentColor" className="size-[18px]">
                         <path d="M240 88.23a54.43 54.43 0 0 1-16 37L189.25 160a54.27 54.27 0 0 1-38.63 16h-.05A54.63 54.63 0 0 1 96 119.84a8 8 0 0 1 16 .45A38.62 38.62 0 0 0 150.58 160a38.4 38.4 0 0 0 27.31-11.31l34.75-34.75a38.63 38.63 0 0 0-54.63-54.63l-11 11A8 8 0 0 1 135.7 59l11-11a54.65 54.65 0 0 1 77.3 0a54.86 54.86 0 0 1 16 40.23m-131 97.43l-11 11A38.4 38.4 0 0 1 70.6 208a38.63 38.63 0 0 1-27.29-65.94L78 107.31a38.63 38.63 0 0 1 66 28.4a8 8 0 0 0 16 .45A54.86 54.86 0 0 0 144 96a54.65 54.65 0 0 0-77.27 0L32 130.75A54.62 54.62 0 0 0 70.56 224a54.28 54.28 0 0 0 38.64-16l11-11a8 8 0 0 0-11.2-11.34" />
@@ -520,7 +520,7 @@ export default function DiscoverClient({
                       rel="noopener"
                       aria-label="Preview template"
                       title="Preview template"
-                      className="grid size-10 shrink-0 place-items-center rounded-[12px] border-2 border-[#222] bg-[#161616] text-[#c9c9c9] no-underline transition hover:border-[#3a3a3a] hover:text-white active:translate-y-[2px]"
+                      className="grid size-10 shrink-0 place-items-center rounded-md border-2 border-[#222] bg-[#161616] text-[#c9c9c9] no-underline transition hover:border-[#3a3a3a] hover:text-white active:translate-y-[2px]"
                     >
                       <svg viewBox="0 0 24 24" fill="currentColor" className="size-[18px]">
                         <path d="M12 9a3 3 0 0 0-3 3a3 3 0 0 0 3 3a3 3 0 0 0 3-3a3 3 0 0 0-3-3m0 8a5 5 0 0 1-5-5a5 5 0 0 1 5-5a5 5 0 0 1 5 5a5 5 0 0 1-5 5m0-12.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5" />
@@ -533,7 +533,7 @@ export default function DiscoverClient({
                         disabled={busyId === t.id}
                         aria-label="Delete template"
                         title="Delete template"
-                        className="grid size-10 shrink-0 cursor-pointer place-items-center rounded-[12px] border-2 border-[#3a1d1d] bg-[#2a1515] text-[#f87171] transition hover:bg-[#3a1d1d] disabled:opacity-50"
+                        className="grid size-10 shrink-0 cursor-pointer place-items-center rounded-md border-2 border-[#3a1d1d] bg-[#2a1515] text-[#f87171] transition hover:bg-[#3a1d1d] disabled:opacity-50"
                       >
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="size-4">
                           <path d="M3 6h18" />
@@ -554,7 +554,7 @@ export default function DiscoverClient({
         <button
           type="button"
           onClick={() => setVisible((v) => v + PAGE_SIZE)}
-          className="mx-auto cursor-pointer rounded-[12px] border-2 border-[#2a2a2a] bg-[#1a1a1a] px-6 py-2.5 text-[14px] font-semibold text-white transition hover:bg-[#222] active:translate-y-[2px]"
+          className="mx-auto cursor-pointer rounded-md border-2 border-[#2a2a2a] bg-[#1a1a1a] px-6 py-2.5 text-[14px] font-semibold text-white transition hover:bg-[#222] active:translate-y-[2px]"
         >
           Load More
         </button>
@@ -574,7 +574,7 @@ export default function DiscoverClient({
       >
         {confirmTpl && confirmTpl.premiumOnly && !isPremium ? (
           <div>
-            <p className="m-0 rounded-[12px] border border-[#7e2c8b7c] bg-[#7e2c8b22] p-3 text-[14px] text-[#e6e6e6]">
+            <p className="m-0 rounded-md border border-pink-500/60 bg-pink-600/15 p-3 text-[14px] text-[#e6e6e6]">
               This template uses Premium features. Upgrade to apply all of it, or use the free parts.
             </p>
             <div className="mt-4 flex gap-2">
@@ -617,7 +617,7 @@ export default function DiscoverClient({
       >
         <h1 className="m-0 mb-2 text-[15px] font-medium text-[#ddd]">Template Preview</h1>
         {cPreviewLoading || !cPreview ? (
-          <div className="h-[190px] w-full animate-pulse rounded-[15px] bg-[#1c1c1c]" />
+          <div className="h-[190px] w-full animate-pulse rounded-lg bg-[#1c1c1c]" />
         ) : (
           <TemplateLivePreview data={cPreview} />
         )}
@@ -631,7 +631,7 @@ export default function DiscoverClient({
               placeholder="My New Template"
               autoComplete="off"
               spellCheck={false}
-              className="w-full rounded-[12px] border-2 border-transparent bg-[#0c0c0c] p-3 text-[15px] text-white outline-none placeholder:text-[#555] focus:border-[#2a2a2a]"
+              className="w-full rounded-md border-2 border-transparent bg-[#0c0c0c] p-3 text-[15px] text-white outline-none placeholder:text-[#555] focus:border-pink-500/60"
             />
           </div>
           <div>
@@ -650,13 +650,13 @@ export default function DiscoverClient({
                 placeholder="Enter tag"
                 autoComplete="off"
                 spellCheck={false}
-                className="min-w-0 flex-1 rounded-[12px] border-2 border-transparent bg-[#0c0c0c] p-3 text-[15px] text-white outline-none placeholder:text-[#555] focus:border-[#2a2a2a]"
+                className="min-w-0 flex-1 rounded-md border-2 border-transparent bg-[#0c0c0c] p-3 text-[15px] text-white outline-none placeholder:text-[#555] focus:border-pink-500/60"
               />
               <button
                 type="button"
                 onClick={addTag}
                 disabled={!cTagInput.trim() || cTags.length >= 6}
-                className="grid size-[46px] shrink-0 cursor-pointer place-items-center rounded-[12px] border-2 border-[#2a2a2a] bg-[#1a1a1a] text-[20px] text-white transition hover:bg-[#222] disabled:opacity-40"
+                className="grid size-[46px] shrink-0 cursor-pointer place-items-center rounded-md border-2 border-[#2a2a2a] bg-[#1a1a1a] text-[20px] text-white transition hover:bg-[#222] disabled:opacity-40"
                 aria-label="Add tag"
               >
                 +
@@ -696,7 +696,7 @@ export default function DiscoverClient({
               onOpenChange={setCVisOpen}
               label={cVisibility === "public" ? "Public" : "Unlisted"}
               ariaLabel="Template visibility"
-              buttonClassName="flex w-full cursor-pointer items-center gap-2 rounded-[12px] border-2 border-transparent bg-[#0c0c0c] p-3 text-left text-[15px] text-white transition hover:border-[#1e1e1e]"
+              buttonClassName="flex w-full cursor-pointer items-center gap-2 rounded-md border-2 border-transparent bg-[#0c0c0c] p-3 text-left text-[15px] text-white transition hover:border-[#1e1e1e]"
             >
               {(["public", "unlisted"] as const).map((v) => (
                 <button
@@ -706,7 +706,7 @@ export default function DiscoverClient({
                     setCVisibility(v);
                     setCVisOpen(false);
                   }}
-                  className={`flex w-full cursor-pointer items-center rounded-[10px] px-3 py-2.5 text-left text-[14px] capitalize transition-colors ${
+                  className={`flex w-full cursor-pointer items-center rounded-md px-3 py-2.5 text-left text-[14px] capitalize transition-colors ${
                     cVisibility === v ? "font-medium text-white" : "text-[#dcdcdc] hover:bg-[#1b1b1b]"
                   }`}
                 >

@@ -48,7 +48,7 @@ function Range({
   action?: React.ReactNode;
 }) {
   return (
-    <div className="group rounded-2xl border border-[#1b1b1b] bg-[#0d0d0d] p-5 transition-all duration-300 ease-out hover:border-white/20 hover:bg-[#0f0f0f]">
+    <div className="group rounded-lg border border-[#1b1b1b] bg-[#0d0d0d] p-5 transition-all duration-300 ease-out hover:border-white/20 hover:bg-[#0f0f0f]">
       <div className="mb-4 flex items-center justify-between gap-3">
         <p className="text-sm font-semibold text-white/60 transition-colors group-hover:text-white/80">{label}</p>
         <div className="flex items-center gap-3">
@@ -240,7 +240,7 @@ export default function LayoutTab({
     <div className="space-y-8">
       {!hideLayoutControls && (
         <>
-          <div className="rounded-2xl border border-[#1b1b1b] bg-[#0d0d0d] p-6">
+          <div className="rounded-lg border border-[#1b1b1b] bg-[#0d0d0d] p-6">
             <div className="flex items-center gap-4">
               <div className="flex-1">
                 <h2 className="text-2xl font-bold text-white">Layout Settings</h2>
@@ -249,7 +249,7 @@ export default function LayoutTab({
             </div>
           </div>
 
-          <div className="rounded-2xl border border-[#1b1b1b] bg-[#0d0d0d] p-6 space-y-4">
+          <div className="rounded-lg border border-[#1b1b1b] bg-[#0d0d0d] p-6 space-y-4">
             <p className="text-sm font-semibold text-white/60">Profile layout</p>
             <div className="flex max-w-3xl flex-row gap-4 overflow-x-auto pb-1">
               {PROFILE_LAYOUTS.map((l) => {
@@ -279,7 +279,7 @@ export default function LayoutTab({
                     }
                     setSelected(l.id);
                   }}
-                  className={`group relative min-w-[150px] flex-1 rounded-2xl border p-2 transition-colors duration-200 ${
+                  className={`group relative min-w-[150px] flex-1 rounded-lg border p-2 transition-colors duration-200 ${
                     isActive
                       ? "border-pink-500/40 bg-pink-500/10"
                       : "border-[#1b1b1b] bg-[#0d0d0d] hover:border-white/20 hover:bg-[#111]"
@@ -359,7 +359,7 @@ export default function LayoutTab({
             </div>
           </div>
 
-          <div className="rounded-2xl border border-[#1b1b1b] bg-[#0d0d0d] p-6 space-y-4">
+          <div className="rounded-lg border border-[#1b1b1b] bg-[#0d0d0d] p-6 space-y-4">
             <div className="flex items-center justify-between gap-4">
               <div>
                 <p className="text-sm font-semibold text-white/60">Card tilt</p>
@@ -385,7 +385,7 @@ export default function LayoutTab({
             </div>
           </div>
 
-          <div className="rounded-2xl border border-[#1b1b1b] bg-[#0d0d0d] p-6 space-y-4">
+          <div className="rounded-lg border border-[#1b1b1b] bg-[#0d0d0d] p-6 space-y-4">
             <div>
               <p className="text-sm font-semibold text-white/60">Badges placement</p>
               <p className="text-xs text-white/40">Choose where badges appear relative to your name.</p>
@@ -396,7 +396,7 @@ export default function LayoutTab({
                   key={option.id}
                   type="button"
                   onClick={() => setBadgesPosition(option.id)}
-                  className={`group rounded-2xl border p-4 text-left transition-all duration-300 ease-out ${
+                  className={`group rounded-lg border p-4 text-left transition-all duration-300 ease-out ${
                     badgesPosition === option.id
                       ? "border-pink-500/40 bg-pink-500/10 scale-[1.02]"
                       : "border-[#1b1b1b] bg-[#0d0d0d] hover:border-white/20 hover:bg-[#111] hover:scale-[1.01]"
@@ -411,7 +411,7 @@ export default function LayoutTab({
             </div>
           </div>
 
-          <div className="rounded-2xl border border-[#1b1b1b] bg-[#0d0d0d] p-6 space-y-4">
+          <div className="rounded-lg border border-[#1b1b1b] bg-[#0d0d0d] p-6 space-y-4">
             <div className="flex items-center justify-between gap-4">
               <div>
                 <p className="text-sm font-semibold text-white/60">Profile views</p>

@@ -1,13 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { WidgetTile, WidgetFrost } from "./tile";
+import { WidgetFrost } from "./tile";
 import { glassPanelStyle, type WidgetGlass } from "./glass";
 
 const shell =
-  "relative flex min-h-[120px] flex-col overflow-hidden rounded-2xl border border-white/[0.06] bg-[#151517] p-4 text-white";
-
-const TILE = { tileColor: "#3B82F6", glyph: "clock", label: "Clock" } as const;
+  "relative flex min-h-[120px] flex-col overflow-hidden rounded-xl border border-white/[0.06] bg-[#151517] p-4 text-white";
 
 export function ClockWidget({
   config,
@@ -39,8 +37,11 @@ export function ClockWidget({
   return (
     <div className={shell} style={glassPanelStyle(glass)}>
       <WidgetFrost glass={glass} />
-      <div className="absolute right-3 top-3 opacity-90">
-        <WidgetTile template={TILE} size="h-6 w-6" rounded="rounded-lg" />
+      <div className="relative z-10 flex items-center gap-1.5">
+        <span className="h-1 w-1 shrink-0 rounded-full bg-white/40" />
+        <span className="text-[10px] font-bold uppercase tracking-[0.14em] text-white/40">
+          Local time
+        </span>
       </div>
       <div className="relative z-10 flex min-h-0 flex-1 flex-col">
         <p className="mt-auto text-3xl font-bold tabular-nums tracking-tight">

@@ -75,7 +75,7 @@ function UploadBox({
         type="button"
         onClick={() => inputRef.current?.click()}
         disabled={uploading}
-        className="flex w-full items-center gap-4 rounded-2xl border border-[#1b1b1b] bg-[#0d0d0d] p-5 text-left transition-all duration-300 ease-out hover:border-white/20 hover:bg-[#0f0f0f] disabled:cursor-not-allowed disabled:opacity-50"
+        className="flex w-full items-center gap-4 rounded-lg border border-[#1b1b1b] bg-[#0d0d0d] p-5 text-left transition-all duration-300 ease-out hover:border-white/20 hover:bg-[#0f0f0f] disabled:cursor-not-allowed disabled:opacity-50"
       >
         <div className="flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded-xl bg-pink-500/10 text-pink-500 transition-transform duration-300 group-hover:scale-110">
           {preview ? (
@@ -244,7 +244,7 @@ export default function InfoTab({
         </div>
       </div>
 
-      <div className="rounded-2xl border border-[#1b1b1b] bg-[#0d0d0d] p-5">
+      <div className="rounded-lg border border-[#1b1b1b] bg-[#0d0d0d] p-5">
         <div className="flex items-center justify-between gap-4">
           <div>
             <p className="text-sm font-semibold text-white/60">Click-to-show overlay</p>

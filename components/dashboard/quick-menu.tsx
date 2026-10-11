@@ -77,7 +77,7 @@ export default function QuickMenu({ anchorRef, open, onClose }: QuickMenuProps) 
   return (
     <div
       ref={menuRef}
-      className={`fixed z-[999] w-[260px] overflow-y-auto rounded-[17px] border-2 border-[#161616] bg-[#111] p-[13px] text-[#fafafa] transition-all duration-250 ${
+      className={`fixed z-[999] w-[260px] overflow-y-auto rounded-lg border-2 border-[#161616] bg-[#111] p-[13px] text-[#fafafa] transition-all duration-250 ${
         shown ? "scale-100 opacity-100" : "scale-[0.85] opacity-0"
       }`}
       style={{
@@ -98,14 +98,14 @@ export default function QuickMenu({ anchorRef, open, onClose }: QuickMenuProps) 
       <div className="flex flex-col gap-2">
         <a
           href="/"
-          className="flex cursor-pointer items-center gap-[6px] rounded-[15px] border-2 border-[#7e2c8b8c] bg-[#7e2c8b63] px-3 py-[7px] font-medium text-[#fafafa] no-underline transition active:translate-y-1"
+          className="flex cursor-pointer items-center gap-[6px] rounded-md border-2 border-pink-500/60 bg-pink-600 px-3 py-[7px] font-medium text-[#fafafa] no-underline transition active:translate-y-1"
         >
           <V3Icon name="home" className="size-[22px]" />
           Home
         </a>
         <a
           href="/leaderboard"
-          className="flex cursor-pointer items-center gap-[6px] rounded-[15px] border-2 border-[#f59f0b3d] bg-[#f59f0b48] px-3 py-[7px] font-medium text-[#fafafa] no-underline transition active:translate-y-1"
+          className="flex cursor-pointer items-center gap-[6px] rounded-md border-2 border-[#f59f0b3d] bg-[#f59f0b48] px-3 py-[7px] font-medium text-[#fafafa] no-underline transition active:translate-y-1"
         >
           <V3Icon name="trophy" className="size-[22px]" />
           Leaderboard
@@ -114,7 +114,7 @@ export default function QuickMenu({ anchorRef, open, onClose }: QuickMenuProps) 
           href="https://discord.gg/HgqbxHRDxX"
           target="_blank"
           rel="noopener nofollow"
-          className="flex cursor-pointer items-center gap-[6px] rounded-[15px] border-2 border-[#5661f659] bg-[#5661f64b] px-3 py-[7px] font-medium text-[#fafafa] no-underline transition active:translate-y-1"
+          className="flex cursor-pointer items-center gap-[6px] rounded-md border-2 border-[#5661f659] bg-[#5661f64b] px-3 py-[7px] font-medium text-[#fafafa] no-underline transition active:translate-y-1"
         >
           <V3Icon name="discord" className="size-[22px]" />
           Discord Server
@@ -122,7 +122,7 @@ export default function QuickMenu({ anchorRef, open, onClose }: QuickMenuProps) 
         <button
           type="button"
           onClick={handleLogout}
-          className="flex cursor-pointer items-center gap-[6px] rounded-[15px] border-2 border-[#f443368c] bg-[#f4433661] px-3 py-[7px] font-medium text-[#fafafa] transition active:translate-y-1"
+          className="flex cursor-pointer items-center gap-[6px] rounded-md border-2 border-[#f443368c] bg-[#f4433661] px-3 py-[7px] font-medium text-[#fafafa] transition active:translate-y-1"
         >
           <V3Icon name="logout" className="size-[22px]" />
           Logout

@@ -39,7 +39,11 @@ export default function SidebarClient({
   const profileHref = username ? `/${encodeURIComponent(username)}` : "/dashboard/overview";
 
   const topItemCls =
-    "flex w-full cursor-pointer items-center gap-[7px] rounded-[20px] px-[15px] py-[10px] text-[17.4px] font-normal text-[#fafafa] no-underline transition-colors duration-300 hover:bg-white/[0.15]";
+    "flex w-full cursor-pointer items-center gap-[7px] rounded-md px-[15px] py-[10px] text-[17.4px] font-normal no-underline transition-colors duration-200";
+  const topItemState = (href: string) =>
+    pathname === href || pathname.startsWith(href + "/")
+      ? "bg-pink-600/20 text-white"
+      : "text-[#b5b5b5] hover:bg-white/[0.07] hover:text-[#fafafa]";
   const topIconCls = "size-[23px] shrink-0";
 
   function shareProfile() {
@@ -53,17 +57,17 @@ export default function SidebarClient({
   return (
     <>
       <aside
-        className="fixed left-0 top-0 z-50 hidden h-full w-[300px] flex-col justify-between overflow-y-auto rounded-br-[50px] rounded-tr-[50px] bg-[#0e0e0e] px-[25px] py-[25px] md:flex"
+        className="fixed left-0 top-0 z-50 hidden h-full w-[300px] flex-col justify-between overflow-y-auto rounded-r-lg border-r border-[#1a1a1a] bg-[#0e0e0e] px-[25px] py-[25px] md:flex"
         aria-label="Dashboard navigation"
       >
         <div>
           <a href="/" className="no-underline" aria-label="egirls.lol home">
             <div className="mt-[5px] flex items-center pb-[15px]">
-              <span className="grid h-[34px] w-[34px] place-content-center rounded-[10px] bg-gradient-to-br from-[#9a45b2] to-[#641f72] text-lg font-black text-white">
+              <span className="grid h-[34px] w-[34px] place-content-center rounded-md bg-gradient-to-br from-[#ec4899] to-[#9d174d] text-lg font-black text-white">
                 E
               </span>
               <h1 className="m-0 ml-[10px] text-2xl font-normal text-[#fafafa]">
-                egirls<span className="text-[#c265e0]">.</span>lol
+                egirls<span className="text-pink-500">.</span>lol
               </h1>
             </div>
           </a>
@@ -71,7 +75,7 @@ export default function SidebarClient({
             <button
               type="button"
               onClick={() => setSearchOpen(true)}
-              className="-ml-[10px] mt-[8px] flex min-h-[46px] w-[calc(100%+10px)] cursor-pointer items-center gap-[10px] rounded-[18px] border-2 border-[#161616] bg-[#121212] px-3 py-[10px] font-[inherit] text-[#a5a4a4] transition-all hover:border-[#242424] hover:bg-[#181818] hover:text-[#fafafa] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#7e2c8b]"
+              className="-ml-[10px] mt-[8px] flex min-h-[46px] w-[calc(100%+10px)] cursor-pointer items-center gap-[10px] rounded-md border-2 border-[#161616] bg-[#121212] px-3 py-[10px] font-[inherit] text-[#a5a4a4] transition-all hover:border-[#242424] hover:bg-[#181818] hover:text-[#fafafa] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pink-500"
             >
               <V3Icon name="search" className="size-[21px] shrink-0 text-[#fafafa]" />
               <span className="min-w-0 flex-1 truncate text-left text-[15px] font-normal">
@@ -88,8 +92,8 @@ export default function SidebarClient({
                 type="button"
                 onClick={() => setAccountOpen((v) => !v)}
                 aria-expanded={accountOpen}
-                className={`flex w-full cursor-pointer items-center justify-between rounded-[20px] px-[15px] py-[10px] transition-colors duration-300 hover:bg-white/[0.15] ${
-                  accountOpen ? "bg-[rgba(218,102,218,0.155)]" : ""
+                className={`flex w-full cursor-pointer items-center justify-between rounded-md px-[15px] py-[10px] transition-colors duration-200 hover:bg-white/[0.07] ${
+                  accountOpen ? "bg-pink-600/20" : ""
                 }`}
               >
                 <h1 className="m-0 flex items-center gap-[8px] text-[17.3px] font-normal text-[#eee]">
@@ -127,24 +131,24 @@ export default function SidebarClient({
                 })}
               </div>
             </div>
-            <Link href="/dashboard/customize" className={topItemCls}>
+            <Link href="/dashboard/customize" className={`${topItemCls} ${topItemState("/dashboard/customize")}`}>
               <V3Icon name="pencil" className={topIconCls} />
               Customize
             </Link>
-            <Link href="/dashboard/links" className={topItemCls}>
+            <Link href="/dashboard/links" className={`${topItemCls} ${topItemState("/dashboard/links")}`}>
               <V3Icon name="link" className={topIconCls} />
               Links
             </Link>
-            <Link href="/dashboard/premium" className={topItemCls}>
+            <Link href="/dashboard/premium" className={`${topItemCls} ${topItemState("/dashboard/premium")}`}>
               <V3Icon name="diamond" className={topIconCls} />
               Premium
             </Link>
-            <Link href="/dashboard/templates" className={topItemCls}>
+            <Link href="/dashboard/templates" className={`${topItemCls} ${topItemState("/dashboard/templates")}`}>
               <V3Icon name="plus-square" className={topIconCls} />
               Templates
             </Link>
             {isAdmin ? (
-              <Link href="/dashboard/admin" className={topItemCls}>
+              <Link href="/dashboard/admin" className={`${topItemCls} ${topItemState("/dashboard/admin")}`}>
                 <V3Icon name="shield" className={topIconCls} />
                 Admin Panel
               </Link>
@@ -152,47 +156,10 @@ export default function SidebarClient({
           </nav>
         </div>
         <div className="-ml-[2px] mt-[20px] flex flex-col gap-[17px]">
-          <div className="flex w-full flex-col gap-[15px] rounded-[25px] bg-[#141414] p-[20px]">
-            <div className="flex flex-col">
-              <h1 className="m-0 ml-[3px] text-base font-normal text-[#c5c5c5]">
-                Have a question or need support?
-              </h1>
-              <a
-                href="https://help.egirls.lol"
-                target="_blank"
-                rel="noopener nofollow"
-                className="mt-[6px] flex items-center gap-[5px] rounded-[15px] border-2 border-[#5661f659] bg-[#5661f64b] px-3 py-[7px] font-normal text-[#f5f5fff1] no-underline transition-all duration-300 hover:scale-[1.05] hover:bg-[#5661f648] hover:text-[#d8daff9d]"
-              >
-                <V3Icon name="help" className="size-6" />
-                Help Center
-              </a>
-            </div>
-            <div className="flex flex-col">
-              <h1 className="m-0 ml-[3px] text-base font-normal text-[#c5c5c5]">
-                Check out your page
-              </h1>
-              <a
-                href={profileHref}
-                target="_blank"
-                rel="noopener nofollow"
-                className="mt-[6px] flex items-center gap-[5px] rounded-[15px] border-2 border-[#db56f644] bg-[#db56f646] px-3 py-[7px] font-normal text-[#feeeffd5] no-underline transition-all duration-300 hover:scale-[1.05] hover:bg-[#9849ac3a] hover:text-[#ba88c7b9]"
-              >
-                <V3Icon name="external" className="size-6" />
-                My Page
-              </a>
-            </div>
-          </div>
-          <button
-            type="button"
-            onClick={shareProfile}
-            className="flex w-full cursor-pointer items-center justify-center gap-[5px] rounded-[20px] border-2 border-[#7e2c8b7c] bg-[#7e2c8b63] px-[15px] py-[10px] text-[#fafafa] transition-colors hover:bg-[#7e2c8b7c] active:translate-y-1"
-          >
-            <V3Icon name="share" className="size-[22px]" />
-            <span>Share Your Profile</span>
-          </button>
+
           <div
             ref={userCardRef}
-            className="flex w-full items-center justify-between rounded-[35px] bg-[#141414] p-[10px]"
+            className="flex w-full items-center justify-between rounded-lg border border-[#1e1e1e] bg-[#141414] p-[10px]"
           >
             <div className="flex min-w-0 items-center gap-[7.5px] overflow-hidden">
               {avatarUrl ? (

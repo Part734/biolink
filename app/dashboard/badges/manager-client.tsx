@@ -40,7 +40,7 @@ interface Badge {
   glow?: boolean;
 }
 
-const badgeCardClass = cardClass.replace("rounded-3xl", "rounded-xl");
+const badgeCardClass = cardClass.replace("rounded-3xl", "rounded-md");
 
 /* ---------------- sortable badge row ---------------- */
 
@@ -65,7 +65,7 @@ function SortableBadgeRow({
         transform: CSS.Transform.toString(transform),
         transition,
       }}
-      className="bg-foreground/10 flex shrink-0 items-center rounded-xl p-1"
+      className="bg-foreground/10 flex shrink-0 items-center rounded-md p-1"
     >
       <button
         type="button"
@@ -111,7 +111,7 @@ function SortableBadgeRow({
       <div className={`${badgeCardClass} w-full ${isDragging ? "opacity-60" : ""}`}>
         <div
           data-hidden={!!badge.hidden}
-          className="data-[hidden=true]:opacity-50 flex flex-row justify-between gap-4 rounded-xl p-2.5 sm:items-center"
+          className="data-[hidden=true]:opacity-50 flex flex-row justify-between gap-4 rounded-md p-2.5 sm:items-center"
         >
           <div className="border-foreground/2.5 bg-foreground/5 text-foreground grid shrink-0 place-content-center rounded-lg border p-1 duration-300">
             <Tooltip label={badge.name}>
@@ -331,7 +331,7 @@ export default function BadgesClient({ isPremium = false }: { isPremium?: boolea
   return (
     <div className="space-y-6">
       <div className="flex flex-row items-center justify-between gap-4">
-        <div className="bg-muted text-muted-foreground inline-flex w-fit items-center justify-center rounded-xl p-1">
+        <div className="bg-muted text-muted-foreground inline-flex w-fit items-center justify-center rounded-md p-1">
           <button
             type="button"
             onClick={() => setTab("owned")}
@@ -375,7 +375,7 @@ export default function BadgesClient({ isPremium = false }: { isPremium?: boolea
             <circle cx="6.5" cy="12.5" r=".5" fill="currentColor" />
             <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z" />
           </svg>
-          Customize
+          Unify color
         </button>
       </div>
 
@@ -385,12 +385,12 @@ export default function BadgesClient({ isPremium = false }: { isPremium?: boolea
             {[0, 1, 2, 3].map((i) => (
               <div
                 key={i}
-                className="bg-foreground/10 h-16 animate-pulse rounded-xl"
+                className="bg-foreground/10 h-16 animate-pulse rounded-md"
               />
             ))}
           </div>
         ) : badges.length === 0 ? (
-          <div className={`${badgeCardClass} rounded-xl px-6 py-14 text-center`}>
+          <div className={`${badgeCardClass} rounded-md px-6 py-14 text-center`}>
             <p className="text-foreground text-base font-semibold">
               No Badges Found
             </p>
@@ -427,12 +427,12 @@ export default function BadgesClient({ isPremium = false }: { isPremium?: boolea
           {[0, 1, 2, 3].map((i) => (
             <div
               key={i}
-              className="bg-foreground/10 h-16 animate-pulse rounded-xl"
+              className="bg-foreground/10 h-16 animate-pulse rounded-md"
             />
           ))}
         </div>
       ) : others.length === 0 ? (
-        <div className={`${badgeCardClass} rounded-xl px-6 py-14 text-center`}>
+        <div className={`${badgeCardClass} rounded-md px-6 py-14 text-center`}>
           <p className="text-foreground text-base font-semibold">
             No Other Badges
           </p>
@@ -445,10 +445,10 @@ export default function BadgesClient({ isPremium = false }: { isPremium?: boolea
           {others.map((badge) => (
             <div
               key={badge.id}
-              className="bg-foreground/10 flex items-center rounded-xl p-1 opacity-60 select-none"
+              className="bg-foreground/10 flex items-center rounded-md p-1 opacity-60 select-none"
             >
               <div className={`${badgeCardClass} w-full`}>
-                <div className="flex flex-row justify-between gap-4 rounded-xl p-2.5 sm:items-center">
+                <div className="flex flex-row justify-between gap-4 rounded-md p-2.5 sm:items-center">
                   <div className="border-foreground/2.5 bg-foreground/5 text-foreground grid shrink-0 place-content-center rounded-lg border p-1 duration-300">
                     <Tooltip label={badge.name}>
                       <BadgeIcon
@@ -485,8 +485,8 @@ export default function BadgesClient({ isPremium = false }: { isPremium?: boolea
       <Modal
         open={customizeOpen}
         onClose={() => setCustomizeOpen(false)}
-        title="Customize Badges"
-        subtitle="Changes every badge at once."
+        title="One color for all badges"
+        subtitle="Pick a color — it applies to every badge at once."
         maxWidth="max-w-sm"
       >
         {customizeDraft && (

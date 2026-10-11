@@ -125,7 +125,7 @@ function Section({
   children: React.ReactNode;
 }) {
   return (
-    <section className="rounded-2xl border border-[#1b1b1b] bg-[#0d0d0d]">
+    <section className="rounded-lg border border-[#1b1b1b] bg-[#0d0d0d]">
       <div className="border-b border-[#1b1b1b] p-6">
         <h3 className="text-2xl font-bold text-white">{title}</h3>
         <p className="text-zinc-400">{description}</p>
@@ -486,7 +486,7 @@ export default function LinksTab({
 
   return (
     <div className="space-y-6">
-      <div className="rounded-2xl border border-[#1b1b1b] bg-[#0d0d0d] p-6">
+      <div className="rounded-lg border border-[#1b1b1b] bg-[#0d0d0d] p-6">
         <h2 className="text-2xl font-bold text-white">
           Links Settings
         </h2>
@@ -640,7 +640,7 @@ export default function LinksTab({
             />
 
             <div
-              className={`${montserrat.className} relative w-full max-w-sm transform-gpu rounded-2xl border border-[#1b1b1b] bg-[#0d0d0d] p-5 transition-[transform,opacity] duration-250 ease-out will-change-transform ${
+              className={`${montserrat.className} relative w-full max-w-sm transform-gpu rounded-lg border border-[#1b1b1b] bg-[#0d0d0d] p-5 transition-[transform,opacity] duration-250 ease-out will-change-transform ${
                 shown
                   ? "translate-y-0 scale-100 opacity-100"
                   : "translate-y-4 scale-95 opacity-0"

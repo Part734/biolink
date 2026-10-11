@@ -33,7 +33,7 @@ export default function CustomizeNav() {
                 {item.label}
               </Link>
               {isActive ? (
-                <div className="bg-primary absolute inset-x-0 bottom-0 h-px" />
+                <div className="absolute inset-x-0 bottom-0 h-0.5 rounded-full bg-pink-500" />
               ) : null}
             </li>
           );

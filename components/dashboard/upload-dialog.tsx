@@ -75,7 +75,7 @@ export default function UploadDialog({
       form.append("type", type);
       const res = await fetch("/api/upload", { method: "POST", body: form });
       const data = await res.json().catch(() => null);
-      if (!data?.url) throw new Error("Upload failed. Please try again.");
+      if (!data?.url) throw new Error(data?.error ?? "Upload failed. Please try again.");
       onUploaded(data.url);
       onClose();
     },
@@ -151,7 +151,7 @@ export default function UploadDialog({
             e.preventDefault();
             pick(e.dataTransfer.files?.[0]);
           }}
-          className="flex min-h-[160px] cursor-pointer flex-col items-center justify-center gap-2 rounded-[15px] border-2 border-[#2a2a2a] bg-[#0d0d0d] p-6 text-center transition hover:border-[#3a3a3a]"
+          className="flex min-h-[160px] cursor-pointer flex-col items-center justify-center gap-2 rounded-lg border-2 border-[#2a2a2a] bg-[#0d0d0d] p-6 text-center transition hover:border-[#3a3a3a]"
         >
           <span className="text-[28px] text-[#5a5a5a]">
             <svg
@@ -185,7 +185,7 @@ export default function UploadDialog({
         <div>
           {showCrop ? (
             <div>
-              <div className="relative mx-auto aspect-square w-full max-w-[300px] overflow-hidden rounded-[15px] border-2 border-[#222] bg-[#0d0d0d]">
+              <div className="relative mx-auto aspect-square w-full max-w-[300px] overflow-hidden rounded-lg border-2 border-[#222] bg-[#0d0d0d]">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   ref={imgRef}
@@ -239,10 +239,10 @@ export default function UploadDialog({
               </div>
             </div>
           ) : isVideo ? (
-            <video src={preview ?? undefined} controls className="max-h-[220px] w-full rounded-[12px] border border-[#222] bg-black" />
+            <video src={preview ?? undefined} controls className="max-h-[220px] w-full rounded-md border border-[#222] bg-black" />
           ) : (
             // eslint-disable-next-line @next/next/no-img-element
-            <img src={preview ?? undefined} alt="Upload preview" className="max-h-[220px] w-full rounded-[12px] border border-[#222] object-cover" />
+            <img src={preview ?? undefined} alt="Upload preview" className="max-h-[220px] w-full rounded-md border border-[#222] object-cover" />
           )}
           <input
             ref={fileRef}
@@ -264,7 +264,7 @@ export default function UploadDialog({
           placeholder="https://cdn.example.com/uploads/example.png"
           spellCheck={false}
           autoComplete="off"
-          className="w-full rounded-[12px] border-2 border-transparent bg-[#0c0c0c] px-3 py-2.5 text-sm text-white outline-none transition placeholder:text-[#555] hover:border-[#1e1e1e] focus:border-[#2a2a2a]"
+          className="w-full rounded-md border-2 border-transparent bg-[#0c0c0c] px-3 py-2.5 text-sm text-white outline-none transition placeholder:text-[#555] hover:border-[#1e1e1e] focus:border-[#2a2a2a]"
         />
       </div>
 

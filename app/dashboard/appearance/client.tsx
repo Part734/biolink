@@ -99,10 +99,6 @@ export default function AppearanceClient({
             initialBlur={profile?.blur ?? 0}
             initialTiltEnabled={!!profile?.tiltEnabled}
             initialTiltMode={profile?.tiltMode ?? "tilt"}
-            initialBorderRadius={profile?.borderRadius ?? 24}
-            initialCardWidth={profile?.cardWidth ?? 420}
-            initialCardOpacity={profile?.cardOpacity ?? 100}
-            initialBorderOpacity={profile?.borderOpacity ?? 100}
           />
         )}
       </div>

@@ -3,21 +3,21 @@ import React from "react";
 /** Shared design tokens for the new dashboard (feds-style dark UI). */
 
 export const cardClass =
-  "relative rounded-3xl border border-white/[0.03] from-[#1a1a1a] to-[#131313] bg-gradient-to-br transition-all duration-500 before:absolute before:inset-0 before:-z-10 before:rounded-2xl before:bg-gradient-to-b before:from-white/[0.02] before:to-transparent before:opacity-0 before:transition-opacity after:absolute after:inset-0 after:z-[-1] after:rounded-2xl after:bg-gradient-to-t after:from-black/30 after:to-transparent";
+  "relative rounded-lg border border-white/[0.03] from-[#1a1a1a] to-[#131313] bg-gradient-to-br transition-all duration-500 before:absolute before:inset-0 before:-z-10 before:rounded-lg before:bg-gradient-to-b before:from-white/[0.02] before:to-transparent before:opacity-0 before:transition-opacity after:absolute after:inset-0 after:z-[-1] after:rounded-lg after:bg-gradient-to-t after:from-black/30 after:to-transparent";
 
 export const tileClass =
-  "group relative border border-white/[0.03] bg-gradient-to-br transition-all duration-500 before:absolute before:inset-0 before:-z-10 before:rounded-2xl before:bg-gradient-to-b before:from-white/[0.02] before:to-transparent before:opacity-0 before:transition-opacity after:absolute after:inset-0 after:z-[-1] after:rounded-2xl after:bg-gradient-to-t after:from-black/30 after:to-transparent from-[#1a1a1a] to-[#0a0a0a]";
+  "group relative border border-white/[0.03] bg-gradient-to-br transition-all duration-500 before:absolute before:inset-0 before:-z-10 before:rounded-md before:bg-gradient-to-b before:from-white/[0.02] before:to-transparent before:opacity-0 before:transition-opacity after:absolute after:inset-0 after:z-[-1] after:rounded-md after:bg-gradient-to-t after:from-black/30 after:to-transparent from-[#1a1a1a] to-[#0a0a0a]";
 
 export const btnBase =
   "inline-flex items-center text-base gap-2 whitespace-nowrap justify-center duration-300 ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50";
 
-export const btnSolid = `${btnBase} bg-primary-600 text-white hover:bg-primary-500 h-9 px-3 text-sm rounded-lg`;
+export const btnSolid = `${btnBase} bg-pink-600 text-white hover:bg-pink-500 h-9 px-3 text-sm rounded-md`;
 
-export const btnNeutral = `${btnBase} rounded-lg border border-neutral-700 bg-neutral-800 text-foreground hover:bg-neutral-700 hover:border-neutral-600 h-9 px-3 text-sm`;
+export const btnNeutral = `${btnBase} rounded-md border border-neutral-700 bg-neutral-800 text-foreground hover:bg-neutral-700 hover:border-neutral-600 h-9 px-3 text-sm`;
 
-export const btnSoft = `${btnBase} rounded-lg border border-primary/30 bg-primary/15 text-foreground hover:bg-primary/25 hover:border-primary/30 h-9 px-3 text-sm`;
+export const btnSoft = `${btnBase} rounded-md border border-pink-500/30 bg-pink-600/15 text-foreground hover:bg-pink-600/25 hover:border-pink-500/30 h-9 px-3 text-sm`;
 
-export const btnGradient = `${btnBase} bg-[linear-gradient(267deg,#6717CC_8.29%,#1753CC_142%)] text-white border border-white/25 hover:opacity-80 h-9 px-3 text-sm rounded-lg`;
+export const btnGradient = `${btnBase} bg-[linear-gradient(135deg,#db2777,#9d174d)] text-white border border-pink-500/40 hover:opacity-90 h-9 px-3 text-sm rounded-md`;
 
 export const inputClass =
   "hover:bg-input/50 transition-all duration-300 selection:bg-primary-600 selection:text-foreground file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground disabled:pointer-events-none disabled:cursor-not-allowed flex h-10 w-full min-w-0 rounded-md border border-input bg-input/30 px-3 py-1 text-base text-foreground outline-none disabled:opacity-50 focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/70 data-[invalid=true]:border-destructive data-[invalid=true]:ring-destructive/40";
@@ -103,10 +103,10 @@ export function CardTile({
 }) {
   const sizeClass =
     size === "sm"
-      ? "size-8 rounded-xl"
+      ? "size-8 rounded-md"
       : size === "lg"
-        ? "size-12 rounded-[1.2rem]"
-        : "size-10 rounded-xl";
+        ? "size-12 rounded-md"
+        : "size-10 rounded-md";
   return (
     <div className={`${tileClass} grid shrink-0 place-content-center ${sizeClass} ${className}`}>
       {children}
@@ -145,7 +145,7 @@ export function Switch({
       onClick={() => onCheckedChange(!checked)}
       disabled={disabled}
       className={`peer focus-visible:border-ring focus-visible:ring-ring/50 border-foreground/10 inline-flex h-[1.15rem] w-8 shrink-0 items-center rounded-full border transition-all outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50 ${
-        checked ? "bg-primary-600" : "bg-input"
+        checked ? "bg-pink-600" : "bg-input"
       }`}
     >
       <span
@@ -177,7 +177,7 @@ export function ToggleCard({
 }) {
   return (
     <div
-      className={`bg-input/30 border-foreground/5 border flex items-center justify-between gap-2.5 rounded-2xl p-3 whitespace-nowrap ${
+      className={`bg-input/30 border-foreground/5 border flex items-center justify-between gap-2.5 rounded-md p-3 whitespace-nowrap ${
         disabled ? "cursor-not-allowed opacity-50" : ""
       }`}
     >

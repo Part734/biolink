@@ -84,7 +84,7 @@ export default function PremiumClient({
   };
 
   return (
-    <div className="w-full max-w-[520px] rounded-[20px] border-2 border-[#1c1c1c] bg-[#111111]">
+    <div className="w-full max-w-[520px] rounded-lg border-2 border-[#1c1c1c] bg-[#111111]">
       <div className="flex items-center justify-between gap-3 px-5 pb-3 pt-4">
         <h2 className="m-0 text-[19px] font-semibold text-white">Upgrade to Premium</h2>
         <button
@@ -116,7 +116,7 @@ export default function PremiumClient({
           The perfect plan to discover your creativity &amp; unlock more features.
         </h3>
         {isPremium && (
-          <p className="m-0 mt-2 rounded-[12px] border border-[#135315] bg-[#103310] p-3 text-[13px] text-[#c9c9c9]">
+          <p className="m-0 mt-2 rounded-md border border-[#135315] bg-[#103310] p-3 text-[13px] text-[#c9c9c9]">
             Premium active{plan ? ` · ${plan}` : ""}{expiresAt ? ` · renews ${new Date(expiresAt).toLocaleDateString()}` : ""}.
           </p>
         )}
@@ -138,7 +138,7 @@ export default function PremiumClient({
                 type="button"
                 onClick={cancel}
                 disabled={cancelling}
-                className="shrink-0 cursor-pointer rounded-[12px] border-2 border-[#2a2a2a] bg-[#1a1a1a] px-4 py-2.5 text-[15px] font-semibold text-white transition hover:bg-[#222] disabled:opacity-50"
+                className="shrink-0 cursor-pointer rounded-md border-2 border-[#2a2a2a] bg-[#1a1a1a] px-4 py-2.5 text-[15px] font-semibold text-white transition hover:bg-[#222] disabled:opacity-50"
               >
                 {cancelling ? "Cancelling…" : "Cancel"}
               </button>

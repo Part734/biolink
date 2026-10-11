@@ -382,7 +382,7 @@ function WidgetDialog({
     >
       <div onClick={onClose} className="absolute inset-0 bg-black/80" />
       <div
-        className={`relative w-full max-w-md transform-gpu rounded-2xl border border-white/[0.03] bg-gradient-to-br from-[#1a1a1a] to-[#131313] p-5 transition-[transform,opacity] duration-250 ease-out will-change-transform ${
+        className={`relative w-full max-w-md transform-gpu rounded-lg border border-white/[0.03] bg-gradient-to-br from-[#1a1a1a] to-[#131313] p-5 transition-[transform,opacity] duration-250 ease-out will-change-transform ${
           shown ? "translate-y-0 scale-100 opacity-100" : "translate-y-4 scale-95 opacity-0"
         }`}
       >

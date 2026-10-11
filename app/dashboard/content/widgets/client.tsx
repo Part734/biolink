@@ -92,7 +92,7 @@ function ModalShell({
       <div
         className={`relative max-h-[85vh] w-full ${
           wide ? "max-w-lg" : "max-w-md"
-        } overflow-y-auto rounded-3xl border border-[#1f1f23] bg-[#131315] p-6 shadow-2xl shadow-black/60`}
+        } overflow-y-auto rounded-lg border border-[#1f1f23] bg-[#131315] p-6 shadow-2xl shadow-black/60`}
       >
         {children}
       </div>
@@ -152,7 +152,7 @@ function ConfigModal({
       </div>
 
       <div className="flex items-center gap-4">
-        <WidgetTile template={template} size="h-14 w-14" rounded="rounded-2xl" />
+        <WidgetTile template={template} size="h-14 w-14" rounded="rounded-md" />
         <div className="min-w-0">
           <h3 className="text-xl font-bold text-white">{template.label}</h3>
           <p className={`text-sm ${connected ? "text-emerald-400" : "text-white/40"}`}>
@@ -405,7 +405,7 @@ export default function WidgetsClient({
     };
 
   return (
-    <div className="rounded-3xl border border-[#1f1f23] bg-[#101012] p-6 sm:p-8">
+    <div className="rounded-lg border border-[#1f1f23] bg-[#101012] p-6 sm:p-8">
       <h2 className="text-xl font-bold text-white">Widgets</h2>
       <p className="mt-1 text-sm text-white/40">
         Connect services and show them on your profile
@@ -436,7 +436,7 @@ export default function WidgetsClient({
 
       <div className="mt-4 space-y-3">
         {listed.length === 0 && (
-          <p className="rounded-2xl border border-dashed border-white/10 px-4 py-8 text-center text-sm text-white/35">
+          <p className="rounded-md border border-dashed border-white/10 px-4 py-8 text-center text-sm text-white/35">
             No widgets yet — add one to show it on your profile.
           </p>
         )}
@@ -447,9 +447,9 @@ export default function WidgetsClient({
           return (
             <div
               key={widget.type}
-              className="flex items-center gap-4 rounded-2xl border border-white/[0.07] bg-white/[0.02] p-3"
+              className="flex items-center gap-4 rounded-md border border-white/[0.07] bg-white/[0.02] p-3"
             >
-              <WidgetTile template={template} size="h-12 w-12" rounded="rounded-2xl" />
+              <WidgetTile template={template} size="h-12 w-12" rounded="rounded-md" />
               <div className="min-w-0 flex-1">
                 <p className="truncate text-sm font-bold text-white">
                   {template.label}
@@ -585,7 +585,7 @@ export default function WidgetsClient({
                   onClick={() => openConfig(template.type)}
                   className="flex w-full items-center gap-4 border-b border-white/[0.07] py-4 text-left transition-colors last:border-0 hover:bg-white/[0.02]"
                 >
-                  <WidgetTile template={template} size="h-12 w-12" rounded="rounded-2xl" />
+                  <WidgetTile template={template} size="h-12 w-12" rounded="rounded-md" />
                   <span className="min-w-0 flex-1">
                     <span className="flex items-center gap-2 text-sm font-bold text-white">
                       {template.label}

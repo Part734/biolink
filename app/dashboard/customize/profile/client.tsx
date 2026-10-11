@@ -128,7 +128,7 @@ export default function ProfileClient({ profile }: { profile: ProfileData }) {
               : "pointer-events-none translate-y-6 scale-95 opacity-0"
           }`}
         >
-          <div className="border border-white/[0.03] from-[#1a1a1a] to-[#131313] bg-gradient-to-br flex items-center justify-between rounded-2xl p-2">
+          <div className="border border-white/[0.03] from-[#1a1a1a] to-[#131313] bg-gradient-to-br flex items-center justify-between rounded-lg p-2">
             <p className="text-foreground ml-2 text-sm font-medium">
               You have unsaved changes.
             </p>
@@ -212,12 +212,12 @@ export default function ProfileClient({ profile }: { profile: ProfileData }) {
                         onClick={() => setAvatarShape(shape.value)}
                         className={`rounded-xl inline-flex border items-center px-2.5 py-1 gap-x-1.5 transition-colors text-xs ${
                           active
-                            ? "border-primary/10 bg-primary/10 hover:bg-primary/10 text-primary"
+                            ? "border-pink-500/20 bg-pink-600/10 hover:bg-pink-600/15 text-pink-300"
                             : "border-foreground/5 bg-foreground/5 hover:bg-foreground/10 text-foreground"
                         }`}
                       >
                         <span
-                          className="bg-primary-300/70 inline-block size-3.5"
+                          className="bg-pink-300/70 inline-block size-3.5"
                           style={{ borderRadius: shape.radius === "50px" ? "999px" : "3px" }}
                         />
                         {shape.label}

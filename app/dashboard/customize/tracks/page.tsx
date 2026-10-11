@@ -29,7 +29,7 @@ export default function CustomizeTracksPage() {
     >
       <Card>
         <CardContent className="flex flex-col items-center justify-center gap-4 py-16 text-center">
-          <div className="border-foreground/5 bg-input/30 grid size-14 place-items-center rounded-2xl border">
+          <div className="border-foreground/5 bg-input/30 grid size-14 place-items-center rounded-lg border">
             <svg
               className="text-muted-foreground size-7"
               viewBox="0 0 24 24"

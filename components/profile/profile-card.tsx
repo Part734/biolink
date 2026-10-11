@@ -247,6 +247,15 @@ export default function ProfileCard({
     window.open(pendingLink.url, "_blank", "noopener,noreferrer");
     setPendingLink(null);
   };
+
+  /** Fire-and-forget click tracking — the anchor itself points at the destination. */
+  const trackClick = (endpoint: string) => {
+    try {
+      void fetch(endpoint, { method: "POST", keepalive: true, cache: "no-store" });
+    } catch {
+      /* tracking must never break navigation */
+    }
+  };
   /* ---------------- settings ---------------- */
   const layout = profile?.layout ?? "centered";
   const template = getLayoutTemplate(layout);
@@ -637,17 +646,18 @@ export default function ProfileCard({
               color={socialTheme.text}
             >
               <a
-                href={preview ? social.url : `/api/social-click?id=${social.id}`}
+                href={social.url}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={platform}
-                onClick={(e) =>
-                  askLink(
-                    e,
-                    getPlatformName(platform),
-                    preview ? social.url : `/api/social-click?id=${social.id}`
-                  )
-                }
+                onAuxClick={() => {
+                  if (!preview) trackClick(`/api/social-click?id=${social.id}`);
+                }}
+                onClick={(e) => {
+                  if (!preview) trackClick(`/api/social-click?id=${social.id}`);
+                  if (preview || e.ctrlKey || e.metaKey || e.shiftKey) return;
+                  askLink(e, getPlatformName(platform), social.url);
+                }}
                 className="flex items-center justify-center overflow-hidden transition-opacity hover:opacity-75"
                 style={{
                   width: `${socialSize}px`,
@@ -720,16 +730,17 @@ export default function ProfileCard({
             color={linkTheme.text}
           >
             <a
-              href={preview ? "#" : `/api/click?id=${link.id}`}
+              href={preview ? "#" : (link.url ?? "#")}
               target={preview ? undefined : "_blank"}
               rel="noopener noreferrer"
-              onClick={(e) =>
-                askLink(
-                  e,
-                  link.title,
-                  preview ? "#" : `/api/click?id=${link.id}`
-                )
-              }
+              onAuxClick={() => {
+                if (!preview) trackClick(`/api/click?id=${link.id}`);
+              }}
+              onClick={(e) => {
+                if (!preview) trackClick(`/api/click?id=${link.id}`);
+                if (preview || e.ctrlKey || e.metaKey || e.shiftKey) return;
+                askLink(e, link.title, link.url ?? "#");
+              }}
               className={`flex items-center gap-4 px-5 py-3.5 font-medium transition ${
                 isCentered ? "justify-center" : ""
               }`}

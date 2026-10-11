@@ -145,6 +145,9 @@ export async function ensureAnalyticsSchema() {
     await sql`ALTER TABLE IF EXISTS page_views ADD COLUMN IF NOT EXISTS ip TEXT`;
     await sql`ALTER TABLE IF EXISTS page_views ADD COLUMN IF NOT EXISTS device TEXT`;
     await sql`ALTER TABLE IF EXISTS page_views ADD COLUMN IF NOT EXISTS country TEXT`;
+    await sql`ALTER TABLE IF EXISTS page_views ADD COLUMN IF NOT EXISTS city TEXT`;
+    await sql`ALTER TABLE IF EXISTS page_views ADD COLUMN IF NOT EXISTS latitude TEXT`;
+    await sql`ALTER TABLE IF EXISTS page_views ADD COLUMN IF NOT EXISTS longitude TEXT`;
     await sql`ALTER TABLE IF EXISTS page_views ADD COLUMN IF NOT EXISTS referrer TEXT`;
     await sql`ALTER TABLE IF EXISTS page_views ADD COLUMN IF NOT EXISTS user_agent TEXT`;
     await sql`CREATE INDEX IF NOT EXISTS page_views_user_created_idx ON page_views (user_id, created_at)`;

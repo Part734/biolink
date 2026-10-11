@@ -96,7 +96,7 @@ function crown() {
 
 function PremiumChip() {
   return (
-    <span className="flex items-center gap-1 rounded-full border border-primary/40 bg-primary/15 px-1.5 py-0.5 text-[10px] font-semibold text-primary-300">
+    <span className="flex items-center gap-1 rounded-full border border-pink-500/40 bg-pink-600/15 px-1.5 py-0.5 text-[10px] font-semibold text-pink-300">
       {crown()} Premium
     </span>
   );
@@ -108,7 +108,7 @@ function PremiumButton({ label }: { label: string }) {
     <button
       type="button"
       onClick={() => router.push("/dashboard/premium")}
-      className="border-foreground/10 text-muted-foreground hover:border-primary/40 hover:text-foreground hover:bg-primary/5 flex w-full items-center justify-between gap-2 rounded-xl border border-dashed bg-transparent px-3 py-2.5 text-sm font-medium transition-colors"
+      className="border-foreground/10 text-muted-foreground hover:border-pink-500/40 hover:text-foreground hover:bg-pink-600/5 flex w-full items-center justify-between gap-2 rounded-md border border-dashed bg-transparent px-3 py-2.5 text-sm font-medium transition-colors"
     >
       <span className="flex items-center gap-2">
         {crown()}
@@ -152,7 +152,7 @@ function SliderRow({
         step={step}
         value={value}
         onChange={(e) => onChange(Number(e.target.value))}
-        className="accent-primary-600 w-full"
+        className="accent-pink-600 w-full"
       />
     </div>
   );
@@ -276,7 +276,7 @@ export default function AppearanceClient({
           description="Pick how your profile card is presented to visitors."
         >
           <svg
-            className="text-primary-300 size-6"
+            className="text-pink-300 size-6"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
@@ -294,12 +294,12 @@ export default function AppearanceClient({
             <button
               type="button"
               onClick={() => setLayout("halo")}
-              className={`border-foreground/5 bg-input/30 flex items-center gap-3 rounded-2xl border p-3 text-left transition-all hover:border-white/15 ${
-                layout === "halo" && !customActive ? "border-primary/40 bg-primary/10" : ""
+              className={`border-foreground/5 bg-input/30 flex items-center gap-3 rounded-lg border p-3 text-left transition-all hover:border-white/15 ${
+                layout === "halo" && !customActive ? "border-pink-500/40 bg-pink-600/10" : ""
               }`}
             >
               <CardTile size="md">
-                <div className="bg-primary-600 size-5 rounded-full" />
+                <div className="bg-pink-600 size-5 rounded-full" />
               </CardTile>
               <div className="min-w-0">
                 <p className="text-foreground text-sm font-semibold">Halo</p>
@@ -313,16 +313,16 @@ export default function AppearanceClient({
               type="button"
               disabled={!isPremium}
               onClick={() => router.push("/dashboard/customize/edit")}
-              className={`border-foreground/5 bg-input/30 flex items-center gap-3 rounded-2xl border p-3 text-left transition-all hover:border-white/15 disabled:cursor-not-allowed disabled:opacity-60 ${
-                customActive ? "border-primary/40 bg-primary/10" : ""
+              className={`border-foreground/5 bg-input/30 flex items-center gap-3 rounded-lg border p-3 text-left transition-all hover:border-white/15 disabled:cursor-not-allowed disabled:opacity-60 ${
+                customActive ? "border-pink-500/40 bg-pink-600/10" : ""
               }`}
             >
               <CardTile size="md">
                 <div className="grid size-5 grid-cols-2 gap-0.5">
-                  <div className="bg-primary-600/80 rounded-sm" />
-                  <div className="border-primary-600/60 rounded-sm border" />
-                  <div className="border-primary-600/60 rounded-sm border" />
-                  <div className="bg-primary-600/80 rounded-sm" />
+                  <div className="bg-pink-600/80 rounded-sm" />
+                  <div className="border-pink-500/60 rounded-sm border" />
+                  <div className="border-pink-500/60 rounded-sm border" />
+                  <div className="bg-pink-600/80 rounded-sm" />
                 </div>
               </CardTile>
               <div className="min-w-0 flex-1">
@@ -338,14 +338,14 @@ export default function AppearanceClient({
           </div>
 
           {!isPremium ? (
-            <div className="from-primary-600/20 via-primary-600/5 flex items-center justify-between gap-3 rounded-xl border border-primary/25 bg-gradient-to-r to-transparent p-3">
+            <div className="from-pink-600/20 via-pink-600/5 flex items-center justify-between gap-3 rounded-md border border-pink-500/25 bg-gradient-to-r to-transparent p-3">
               <p className="text-foreground/80 text-xs">
                 Unlock the free-move canvas editor with Premium.
               </p>
               <button
                 type="button"
                 onClick={() => router.push("/dashboard/premium")}
-                className="bg-primary-600 hover:bg-primary-500 flex h-8 shrink-0 items-center gap-1.5 rounded-lg px-3 text-xs font-semibold text-white transition-colors"
+                className="bg-pink-600 hover:bg-pink-500 flex h-8 shrink-0 items-center gap-1.5 rounded-lg px-3 text-xs font-semibold text-white transition-colors"
               >
                 {crown()} Upgrade
               </button>
@@ -374,7 +374,7 @@ export default function AppearanceClient({
           description="Control the shape, size and frost of your card."
         >
           <svg
-            className="text-primary-300 size-6"
+            className="text-pink-300 size-6"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
@@ -399,8 +399,8 @@ export default function AppearanceClient({
                     setBorderRadius(template.radius);
                     setCardBlurEnabled(template.blur > 0);
                   }}
-                  className={`border-foreground/5 bg-input/30 flex flex-col items-center gap-2 rounded-2xl border p-3 transition-all hover:border-white/15 ${
-                    active ? "border-primary/40 bg-primary/10" : ""
+                  className={`border-foreground/5 bg-input/30 flex flex-col items-center gap-2 rounded-lg border p-3 transition-all hover:border-white/15 ${
+                    active ? "border-pink-500/40 bg-pink-600/10" : ""
                   }`}
                 >
                   <div
@@ -410,9 +410,9 @@ export default function AppearanceClient({
                       backdropFilter: template.blur > 0 ? `blur(${template.blur}px)` : undefined,
                     }}
                   >
-                    <div className="bg-primary-600 size-3 rounded-full" />
+                    <div className="bg-pink-600 size-3 rounded-full" />
                   </div>
-                  <p className={`text-xs font-semibold ${active ? "text-primary-300" : "text-foreground"}`}>
+                  <p className={`text-xs font-semibold ${active ? "text-pink-300" : "text-foreground"}`}>
                     {template.label}
                   </p>
                 </button>
@@ -422,7 +422,7 @@ export default function AppearanceClient({
 
           <Divider />
 
-          <div className="flex items-center justify-between gap-2.5 rounded-2xl border border-foreground/5 bg-input/30 p-3">
+          <div className="flex items-center justify-between gap-2.5 rounded-lg border border-foreground/5 bg-input/30 p-3">
             <div>
               <p className="text-foreground text-sm font-medium leading-none">Advanced</p>
               <p className="text-muted-foreground mt-1 text-xs">
@@ -437,7 +437,7 @@ export default function AppearanceClient({
           </div>
 
           {advanced ? (
-            <div className="space-y-5 rounded-2xl border border-foreground/5 bg-input/20 p-4">
+            <div className="space-y-5 rounded-lg border border-foreground/5 bg-input/20 p-4">
               <SliderRow
                 label="Border Radius"
                 value={borderRadius}
@@ -532,7 +532,7 @@ export default function AppearanceClient({
           description="Tint every part of your profile card."
         >
           <svg
-            className="text-primary-300 size-6"
+            className="text-pink-300 size-6"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
@@ -632,7 +632,7 @@ export default function AppearanceClient({
           description="Extra flair for your profile."
         >
           <svg
-            className="text-primary-300 size-6"
+            className="text-pink-300 size-6"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
@@ -790,7 +790,7 @@ export default function AppearanceClient({
           description="A spoiler overlay that hides your card until clicked."
         >
           <svg
-            className="text-primary-300 size-6"
+            className="text-pink-300 size-6"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
@@ -877,7 +877,7 @@ export default function AppearanceClient({
               <div onClick={closePreview} className="absolute inset-0 bg-black/80" />
 
               <div
-                className={`relative flex h-[85vh] w-full max-w-3xl transform-gpu flex-col overflow-hidden rounded-2xl border border-white/[0.03] bg-[#0d0d0d] transition-[transform,opacity] duration-250 ease-out will-change-transform ${
+                className={`relative flex h-[85vh] w-full max-w-3xl transform-gpu flex-col overflow-hidden rounded-lg border border-white/[0.03] bg-[#0d0d0d] transition-[transform,opacity] duration-250 ease-out will-change-transform ${
                   previewShown
                     ? "translate-y-0 scale-100 opacity-100"
                     : "translate-y-4 scale-95 opacity-0"

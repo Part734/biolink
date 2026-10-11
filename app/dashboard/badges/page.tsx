@@ -27,7 +27,7 @@ export default async function BadgesPage() {
 
         {!isPremium ? (
           <div
-            className="flex flex-col gap-[20px] rounded-[20px] border-2 border-[#9849ac3a] bg-cover bg-center p-[20px]"
+            className="flex flex-col gap-[20px] rounded-lg border-2 border-pink-500/25 bg-cover bg-center p-[20px]"
             style={{ backgroundImage: "url(/gradient-background.png)" }}
           >
             <div className="flex min-w-0 flex-col gap-[7px]">
@@ -41,7 +41,7 @@ export default async function BadgesPage() {
             </div>
             <a
               href="/dashboard/premium"
-              className="flex w-fit cursor-pointer items-center justify-center gap-[5px] rounded-[15px] border-2 border-[#212121] bg-[#1a1a1a] px-[15px] py-[9px] text-center text-[17.5px] text-[#fafafa] no-underline transition-all duration-250 hover:bg-[#202020] active:translate-y-1"
+              className="flex w-fit cursor-pointer items-center justify-center gap-[5px] rounded-md border-2 border-[#212121] bg-[#1a1a1a] px-[15px] py-[9px] text-center text-[17.5px] text-[#fafafa] no-underline transition-all duration-250 hover:bg-[#202020] active:translate-y-1"
             >
               Upgrade Now
             </a>

@@ -21,9 +21,9 @@ export default function StatCard({
         : "text-white/40";
 
   return (
-    <div className="rounded-2xl border border-[#1b1b1b] bg-[#0d0d0d] p-5 flex items-center gap-4 transition-all duration-200 hover:border-white/20 hover:bg-white/[0.02]">
+    <div className="rounded-lg border border-[#1e1e1e] bg-[#0d0d0d] p-5 flex items-center gap-4 transition-all duration-200 hover:border-pink-500/40 hover:bg-pink-600/[0.04]">
       {icon && (
-        <div className="w-12 h-12 rounded-xl bg-pink-500/10 text-pink-500 flex items-center justify-center shrink-0">
+        <div className="w-12 h-12 rounded-md bg-pink-600/15 text-pink-400 flex items-center justify-center shrink-0">
           {icon}
         </div>
       )}

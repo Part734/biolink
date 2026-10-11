@@ -23,11 +23,11 @@ export default function MobileNav({ username }: { username: string }) {
       {/* top bar */}
       <header className="fixed inset-x-0 top-0 z-50 flex items-center justify-between border-b border-[#181818] bg-[#0e0e0e]/95 px-4 py-3 backdrop-blur md:hidden">
         <a href="/" className="flex items-center no-underline" aria-label="egirls.lol home">
-          <span className="grid h-8 w-8 place-content-center rounded-[10px] bg-gradient-to-br from-[#9a45b2] to-[#641f72] text-base font-black text-white">
+          <span className="grid h-8 w-8 place-content-center rounded-md bg-gradient-to-br from-[#ec4899] to-[#9d174d] text-base font-black text-white">
             E
           </span>
           <span className="ml-2 text-lg font-semibold text-[#fafafa]">
-            egirls<span className="text-[#c265e0]">.</span>lol
+            egirls<span className="text-pink-500">.</span>lol
           </span>
         </a>
         <div className="flex items-center gap-2">
@@ -35,7 +35,7 @@ export default function MobileNav({ username }: { username: string }) {
             href={profileHref}
             target="_blank"
             rel="noopener nofollow"
-            className="flex items-center gap-1 rounded-xl border border-[#7e2c8b7c] bg-[#7e2c8b63] px-3 py-1.5 text-[13px] font-medium text-[#fafafa] no-underline"
+            className="flex items-center gap-1 rounded-md border border-pink-500/60 bg-pink-600 px-3 py-1.5 text-[13px] font-semibold text-white no-underline transition-colors hover:bg-pink-500"
           >
             <V3Icon name="external" className="size-4" />
             My Page
@@ -45,7 +45,7 @@ export default function MobileNav({ username }: { username: string }) {
             onClick={() => setOpen((v) => !v)}
             aria-expanded={open}
             aria-label="Open menu"
-            className="grid size-9 place-content-center rounded-xl border border-[#222] bg-[#141414] text-[#fafafa]"
+            className="grid size-9 place-content-center rounded-md border border-[#222] bg-[#141414] text-[#fafafa]"
           >
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="size-5">
               {open ? <path d="M18 6 6 18M6 6l12 12" /> : <path d="M3 6h18M3 12h18M3 18h18" />}
@@ -61,7 +61,7 @@ export default function MobileNav({ username }: { username: string }) {
         }`}
         style={{ transformOrigin: "top center" }}
       >
-        <nav className="rounded-2xl border border-[#1c1c1c] bg-[#111] p-2">
+        <nav className="rounded-lg border border-[#1e1e1e] bg-[#111] p-2">
           {NAV.map((item) => {
             const active = pathname === item.href || pathname.startsWith(item.href + "/");
             return (
@@ -69,8 +69,8 @@ export default function MobileNav({ username }: { username: string }) {
                 key={item.href}
                 href={item.href}
                 onClick={() => setOpen(false)}
-                className={`flex items-center gap-3 rounded-xl px-3 py-2.5 text-[15px] no-underline transition-colors ${
-                  active ? "bg-[#7e2c8b33] text-white" : "text-[#bdbdbd] hover:bg-white/5 hover:text-white"
+                className={`flex items-center gap-3 rounded-md px-3 py-2.5 text-[15px] no-underline transition-colors ${
+                  active ? "bg-pink-600/20 text-white" : "text-[#bdbdbd] hover:bg-white/5 hover:text-white"
                 }`}
               >
                 <V3Icon name={item.icon} className="size-5" />
@@ -90,8 +90,8 @@ export default function MobileNav({ username }: { username: string }) {
               <Link
                 key={item.href}
                 href={item.href}
-                className={`flex flex-col items-center gap-1 rounded-xl px-1 py-1.5 text-[11px] no-underline transition-colors ${
-                  active ? "text-[#d7a2e6]" : "text-[#7a7a7a] hover:text-[#c9c9c9]"
+                className={`flex flex-col items-center gap-1 rounded-md px-1 py-1.5 text-[11px] no-underline transition-colors ${
+                  active ? "text-pink-400" : "text-[#7a7a7a] hover:text-[#c9c9c9]"
                 }`}
               >
                 <V3Icon name={item.icon} className="size-5" />

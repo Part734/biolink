@@ -28,7 +28,7 @@ const iconSvg = {
 };
 
 const actionBase =
-  "block w-full cursor-pointer rounded-[15px] border-2 border-[#202020] bg-[#191919] px-[10px] py-[10px] text-center text-[#fafafa] no-underline transition-all duration-250 hover:border-[#323232] active:translate-y-[4px]";
+  "block w-full cursor-pointer rounded-lg border-2 border-[#202020] bg-[#191919] px-[10px] py-[10px] text-center text-[#fafafa] no-underline transition-all duration-250 hover:border-[#323232] active:translate-y-[4px]";
 
 interface AliasRow {
   id: string;
@@ -144,7 +144,7 @@ export default function SettingsClient({
             General Information
           </h1>
           <div className="mt-[20px] flex flex-col gap-[20px]">
-            <div className="flex flex-col gap-[13px] rounded-[15px] bg-[#151515] p-[15px] text-left">
+            <div className="flex flex-col gap-[13px] rounded-lg bg-[#151515] p-[15px] text-left">
               <div className="w-full">
                 <h1 className="m-0 mb-[5.5px] ml-[3px] text-[16px] font-[500] text-[#dddddd]">
                   Username
@@ -166,7 +166,7 @@ export default function SettingsClient({
                       setError(null);
                       setUsernameOpen(true);
                     }}
-                    className="w-full cursor-pointer rounded-[15px] border-2 border-transparent bg-[#0c0c0c] p-[10px_12px_10px_40px] text-[15px] text-[#eee] outline-none transition-[0.3s] select-text hover:border-[#2a2a2a] focus:border-[#2a2a2a]"
+                    className="w-full cursor-pointer rounded-lg border-2 border-transparent bg-[#0c0c0c] p-[10px_12px_10px_40px] text-[15px] text-[#eee] outline-none transition-[0.3s] select-text hover:border-[#2a2a2a] focus:border-pink-500/60"
                   />
                 </div>
                 <button
@@ -176,7 +176,7 @@ export default function SettingsClient({
                     setError(null);
                     setUsernameOpen(true);
                   }}
-                  className="mt-2 w-full cursor-pointer rounded-[12px] border-2 border-[#2a2a2a] bg-[#1a1a1a] px-3 py-2 text-[14px] font-medium text-[#fafafa] transition hover:border-[#3a3a3a] hover:bg-[#202020]"
+                  className="mt-2 w-full cursor-pointer rounded-md border-2 border-[#2a2a2a] bg-[#1a1a1a] px-3 py-2 text-[14px] font-medium text-[#fafafa] transition hover:border-[#3a3a3a] hover:bg-[#202020]"
                 >
                   Change Username
                 </button>
@@ -204,7 +204,7 @@ export default function SettingsClient({
                       setError(null);
                       setDisplayOpen(true);
                     }}
-                    className="w-full cursor-pointer rounded-[15px] border-2 border-transparent bg-[#0c0c0c] p-[10px_12px_10px_40px] text-[15px] text-[#eee] outline-none transition-[0.3s] select-text hover:border-[#2a2a2a] focus:border-[#2a2a2a]"
+                    className="w-full cursor-pointer rounded-lg border-2 border-transparent bg-[#0c0c0c] p-[10px_12px_10px_40px] text-[15px] text-[#eee] outline-none transition-[0.3s] select-text hover:border-[#2a2a2a] focus:border-pink-500/60"
                   />
                 </div>
                 <button
@@ -214,7 +214,7 @@ export default function SettingsClient({
                     setError(null);
                     setDisplayOpen(true);
                   }}
-                  className="mt-2 w-full cursor-pointer rounded-[12px] border-2 border-[#2a2a2a] bg-[#1a1a1a] px-3 py-2 text-[14px] font-medium text-[#fafafa] transition hover:border-[#3a3a3a] hover:bg-[#202020]"
+                  className="mt-2 w-full cursor-pointer rounded-md border-2 border-[#2a2a2a] bg-[#1a1a1a] px-3 py-2 text-[14px] font-medium text-[#fafafa] transition hover:border-[#3a3a3a] hover:bg-[#202020]"
                 >
                   Change Display Name
                 </button>
@@ -240,7 +240,7 @@ export default function SettingsClient({
                     setError(null);
                     setAliasOpen(true);
                   }}
-                  className="inline-flex w-full cursor-pointer items-center justify-center gap-[8px] rounded-[15px] border-2 border-[#191919] bg-[#131313] p-[9px_14px] text-[14px] font-[500] text-[#f2f2f2] transition-[0.25s] select-none hover:border-[#1d1d1d] hover:bg-[#181818] active:translate-y-[4px]"
+                  className="inline-flex w-full cursor-pointer items-center justify-center gap-[8px] rounded-lg border-2 border-[#191919] bg-[#131313] p-[9px_14px] text-[14px] font-[500] text-[#f2f2f2] transition-[0.25s] select-none hover:border-[#1d1d1d] hover:bg-[#181818] active:translate-y-[4px]"
                 >
                   <span className="inline-flex text-[19px] [&>svg]:block">
                     <span dangerouslySetInnerHTML={{ __html: iconSvg.alias }} />
@@ -260,7 +260,7 @@ export default function SettingsClient({
                     />
                   </span>
                   <p
-                    className="absolute right-[15px] z-10 m-0 flex cursor-pointer rounded-[10px] p-[5px] text-[20px] text-[#bbbbbb] transition-[0.3s] hover:bg-[#fafafa23] active:translate-y-[3px]"
+                    className="absolute right-[15px] z-10 m-0 flex cursor-pointer rounded-md p-[5px] text-[20px] text-[#bbbbbb] transition-[0.3s] hover:bg-[#fafafa23] active:translate-y-[3px]"
                     onClick={() => setShowEmail((v) => !v)}
                   >
                     <span
@@ -274,7 +274,7 @@ export default function SettingsClient({
                     maxLength={72}
                     type={showEmail ? "text" : "password"}
                     value={email}
-                    className="w-full rounded-[15px] border-2 border-transparent bg-[#0c0c0c] p-[10px_47px_10px_40px] text-[15px] text-[#eee] outline-none transition-[0.3s] select-text hover:border-[#191919] focus:border-[#191919]"
+                    className="w-full rounded-lg border-2 border-transparent bg-[#0c0c0c] p-[10px_47px_10px_40px] text-[15px] text-[#eee] outline-none transition-[0.3s] select-text hover:border-[#191919] focus:border-pink-500/60"
                   />
                 </div>
               </div>
@@ -288,7 +288,7 @@ export default function SettingsClient({
             Security Settings
           </h1>
           <div className="mt-[20px] flex flex-col gap-[20px]">
-            <div className="flex flex-col items-stretch gap-[13px] rounded-[15px] bg-[#151515] p-[15px] text-left">
+            <div className="flex flex-col items-stretch gap-[13px] rounded-lg bg-[#151515] p-[15px] text-left">
               <div>
                 <h1 className="m-0 text-[20px] font-[500] text-[#fafafa]">
                   Active sessions
@@ -300,7 +300,7 @@ export default function SettingsClient({
               </div>
               <button
                 type="button"
-                className="flex min-h-[42px] w-full cursor-pointer items-center justify-center gap-[8px] rounded-[13px] border-2 border-[#202020] bg-[#1a1a1a] p-[9px_13px] text-[14px] font-[600] whitespace-nowrap text-[#f0f0f0] transition-[0.25s] hover:border-[#333333] hover:bg-[#1f1f1f] active:translate-y-[2px]"
+                className="flex min-h-[42px] w-full cursor-pointer items-center justify-center gap-[8px] rounded-md border-2 border-[#202020] bg-[#1a1a1a] p-[9px_13px] text-[14px] font-[600] whitespace-nowrap text-[#f0f0f0] transition-[0.25s] hover:border-[#333333] hover:bg-[#1f1f1f] active:translate-y-[2px]"
               >
                 <span className="inline-flex text-[18px] [&>svg]:block">
                   <span dangerouslySetInnerHTML={{ __html: iconSvg.monitor }} />
@@ -317,7 +317,7 @@ export default function SettingsClient({
             Account Actions
           </h1>
           <div className="mt-[20px]">
-            <div className="flex flex-col gap-[13px] rounded-[15px] bg-[#151515] p-[15px] text-left">
+            <div className="flex flex-col gap-[13px] rounded-lg bg-[#151515] p-[15px] text-left">
               <div className="flex flex-col gap-[13px]">
                 <span className={actionBase}>Change Email</span>
                 <div>
@@ -371,7 +371,7 @@ export default function SettingsClient({
                   maxLength={16}
                   value={usernameDraft}
                   onChange={(e) => setUsernameDraft(e.target.value)}
-                  className="w-full rounded-[15px] border-2 border-transparent bg-[#0c0c0c] p-[10px_12px_10px_40px] text-[15px] text-[#eee] outline-none focus:border-[#2a2a2a]"
+                  className="w-full rounded-lg border-2 border-transparent bg-[#0c0c0c] p-[10px_12px_10px_40px] text-[15px] text-[#eee] outline-none focus:border-pink-500/60"
                 />
               </div>
               {error ? <p className="m-0 mt-2 text-[13px] text-[#f87171]">{error}</p> : null}
@@ -403,7 +403,7 @@ export default function SettingsClient({
                   maxLength={40}
                   value={displayDraft}
                   onChange={(e) => setDisplayDraft(e.target.value)}
-                  className="w-full rounded-[15px] border-2 border-transparent bg-[#0c0c0c] p-[10px_12px_10px_40px] text-[15px] text-[#eee] outline-none focus:border-[#2a2a2a]"
+                  className="w-full rounded-lg border-2 border-transparent bg-[#0c0c0c] p-[10px_12px_10px_40px] text-[15px] text-[#eee] outline-none focus:border-pink-500/60"
                 />
               </div>
               {error ? <p className="m-0 mt-2 text-[13px] text-[#f87171]">{error}</p> : null}
@@ -432,7 +432,7 @@ export default function SettingsClient({
                   </div>
                   <div className="mt-3 flex flex-col gap-2">
                     {[0, 1].map((i) => (
-                      <div key={i} className="h-[58px] w-full animate-pulse rounded-[12px] bg-[#1c1c1c]" />
+                      <div key={i} className="h-[58px] w-full animate-pulse rounded-md bg-[#1c1c1c]" />
                     ))}
                   </div>
                 </>
@@ -442,7 +442,7 @@ export default function SettingsClient({
               <h3 className="m-0 mt-1 text-[14px] font-normal text-[#a1a1a1]">
                 Use alias credits to create extra usernames that redirect to your main profile.
               </h3>
-              <a href="/dashboard/premium" className="mt-3 block rounded-[15px] border-2 border-[#7e2c8b7c] bg-[#7e2c8b63] p-3 text-center text-[14px] font-medium text-white no-underline">
+              <a href="/dashboard/premium" className="mt-3 block rounded-lg border-2 border-pink-500/60 bg-pink-600 p-3 text-center text-[14px] font-medium text-white no-underline">
                 Upgrade to Premium for {5} Alias slots
               </a>
               <div className="mt-3 flex flex-wrap gap-2 text-[13px]">
@@ -453,17 +453,17 @@ export default function SettingsClient({
                   {aliases.length}/{slots} Alias Slots Used
                 </span>
                 {isPremium ? (
-                  <span className="rounded-full border border-[#7e2c8b7c] bg-[#7e2c8b63] px-3 py-1 text-white">Premium</span>
+                  <span className="rounded-full border border-pink-500/60 bg-pink-600 px-3 py-1 text-white">Premium</span>
                 ) : null}
               </div>
               <div className="mt-3 flex flex-col gap-2">
                 {aliases.length === 0 ? (
-                  <div className="rounded-[12px] border border-[#1e1e1e] bg-[#0e0e0e] p-4 text-center text-[14px] text-[#8a8a8a]">
+                  <div className="rounded-md border border-[#1e1e1e] bg-[#0e0e0e] p-4 text-center text-[14px] text-[#8a8a8a]">
                     No aliases yet. Create your first alias below.
                   </div>
                 ) : (
                   aliases.map((a) => (
-                    <div key={a.id} className="flex items-center justify-between gap-2 rounded-[12px] border border-[#1e1e1e] bg-[#0e0e0e] p-3">
+                    <div key={a.id} className="flex items-center justify-between gap-2 rounded-md border border-[#1e1e1e] bg-[#0e0e0e] p-3">
                       <a
                         href={`/${encodeURIComponent(a.alias)}`}
                         target="_blank"
@@ -476,7 +476,7 @@ export default function SettingsClient({
                         type="button"
                         disabled={aliasBusy}
                         onClick={() => deleteAlias(a.id)}
-                        className="shrink-0 cursor-pointer rounded-[12px] border-2 border-[#3a1d1d] bg-[#2a1515] px-4 py-1.5 text-[13px] font-semibold text-[#f87171] transition hover:bg-[#3a1d1d] disabled:opacity-50"
+                        className="shrink-0 cursor-pointer rounded-md border-2 border-[#3a1d1d] bg-[#2a1515] px-4 py-1.5 text-[13px] font-semibold text-[#f87171] transition hover:bg-[#3a1d1d] disabled:opacity-50"
                       >
                         Delete
                       </button>
@@ -496,7 +496,7 @@ export default function SettingsClient({
                     maxLength={16}
                     value={aliasDraft}
                     onChange={(e) => setAliasDraft(e.target.value)}
-                    className="w-full rounded-[15px] border-2 border-transparent bg-[#0c0c0c] p-[10px_12px_10px_40px] text-[15px] text-[#eee] outline-none focus:border-[#2a2a2a]"
+                    className="w-full rounded-lg border-2 border-transparent bg-[#0c0c0c] p-[10px_12px_10px_40px] text-[15px] text-[#eee] outline-none focus:border-pink-500/60"
                   />
                 </div>
                 {error ? <p className="m-0 mt-2 text-[13px] text-[#f87171]">{error}</p> : null}

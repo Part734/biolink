@@ -4,8 +4,9 @@ import { count, eq, lte } from "drizzle-orm";
 import DashboardShell from "@/components/dashboard/shell";
 import { getSession } from "@/lib/auth";
 import { redirect } from "next/navigation";
-import V3BarChart from "@/components/dashboard/v3-bar-chart";
+import ViewsLineChart from "@/components/dashboard/views-line-chart";
 import { V3Icon } from "@/components/dashboard/v3-icons";
+import CompletionCard from "./completion-card";
 
 export const metadata = {
   title: "Account Overview — egirls.lol",
@@ -126,11 +127,11 @@ export default async function OverviewPage() {
             {statCards.map((card) => (
               <div
                 key={card.label}
-                className="flex flex-col gap-3 rounded-[20px] border border-[rgba(255,126,255,0.10)] bg-[rgba(255,126,255,0.07)] p-5"
+                className="flex flex-col gap-3 rounded-lg border border-pink-500/25 bg-pink-600/[0.07] p-5 transition-colors hover:border-pink-500/45"
               >
                 <div className="flex items-center justify-between">
                   <h1 className="m-0 text-[15px] font-[550] text-[#cfcfcf]">{card.label}</h1>
-                  <V3Icon name={card.icon} className="size-[22px] text-[#d4d4d4]" />
+                  <V3Icon name={card.icon} className="size-[22px] text-pink-400" />
                 </div>
                 <div>
                   <h1 className="m-0 truncate text-[24px] font-bold text-[#fafafa]">{card.value}</h1>
@@ -146,60 +147,7 @@ export default async function OverviewPage() {
             Account Statistics
           </h1>
           <div className="flex gap-[25px] max-[1240px]:flex-col">
-            <div className="w-full min-w-0 flex-1 rounded-[15px] bg-[#111111] p-5">
-              <div className="flex flex-col gap-[10px]">
-                <div className="mb-[10px] flex items-center justify-between">
-                  <h1 className="m-0 text-[19px] text-[#fafafa]">Profile Completion</h1>
-                </div>
-                <div className="flex items-center gap-[12px]">
-                  <div className="h-[18px] w-full min-w-0 flex-1 overflow-hidden rounded-full border border-[#232323] bg-[#1b1b1b]">
-                    <div
-                      className="h-full rounded-full bg-gradient-to-r from-[#9a45b2] to-[#d283eb] transition-all duration-500"
-                      style={{ width: `${completionPct}%` }}
-                    />
-                  </div>
-                  <span className="shrink-0 text-[14px] whitespace-nowrap tabular-nums text-[#a1a1a1]">
-                    {completionPct}% completed
-                  </span>
-                </div>
-                {completionPct < 100 ? (
-                  <div className="mt-[10px] rounded-[15px] border-2 border-[#202020] bg-[#1a1a1a] p-[15px]">
-                    <h1 className="m-0 flex items-center gap-[7px] text-[19px] font-medium text-[#fafafa]">
-                      <V3Icon name="alert" className="size-[25px] text-[#f1a342]" />
-                      Your profile isn&apos;t complete yet!
-                    </h1>
-                    <h3 className="m-0 mt-[5px] text-[15px] font-[450] text-[#a1a1a1]">
-                      Complete your profile to make it more discoverable and appealing.
-                    </h3>
-                  </div>
-                ) : null}
-              </div>
-              <div className="mt-5 flex flex-col gap-3">
-                {completionItems.map((item) => (
-                  <div
-                    key={item.label}
-                    className="flex w-full items-center justify-between gap-[7px] rounded-[16px] border-2 border-[#202020] bg-[#1a1a1a] p-[10px_12px]"
-                  >
-                    <div className="flex min-w-0 items-center">
-                      <span className={`grid size-8 shrink-0 place-content-center rounded-full ${item.done ? "bg-[#7e2c8b33] text-[#d7a2e6]" : "bg-[#222] text-[#707070]"}`}>
-                        <V3Icon name={item.icon} className="size-[18px]" />
-                      </span>
-                      <h1 className="m-0 truncate px-[10px] text-[15px] font-medium text-[#fafafa]">
-                        {item.label}
-                      </h1>
-                    </div>
-                    <a
-                      href={item.href}
-                      className="flex shrink-0 cursor-pointer items-center gap-1 rounded-full border border-[#2a2a2a] px-3 py-1 text-[12px] text-[#b6b6b6] no-underline transition hover:border-[#3a3a3a] hover:text-white"
-                      aria-label={item.label}
-                    >
-                      {item.done ? "Done" : "Go"}
-                      <V3Icon name="chevron-right" className="size-4" />
-                    </a>
-                  </div>
-                ))}
-              </div>
-            </div>
+            <CompletionCard completionPct={completionPct} items={completionItems} />
           </div>
         </div>
 
@@ -208,30 +156,30 @@ export default async function OverviewPage() {
             Account Analytics{" "}
             <a
               href="/dashboard/analytics"
-              className="rounded-[20px] border-2 border-[#7e2c8b7c] bg-[#7e2c8b63] px-[11px] py-[6px] text-[13px] font-medium text-[#fafafa] no-underline"
+              className="rounded-md border border-pink-500/50 bg-pink-600 px-[11px] py-[6px] text-[13px] font-semibold text-white no-underline transition-colors hover:bg-pink-500"
             >
               View More
             </a>
           </h1>
           <div className="flex gap-[25px] max-[1240px]:flex-col">
-            <div className="w-full min-w-0 flex-1 rounded-[15px] bg-[#111111] p-[15px]">
+            <div className="w-full min-w-0 flex-1 rounded-lg border border-[#1e1e1e] bg-[#111111] p-[15px]">
               <h1 className="m-0 text-[17px] text-[#fafafa]">
                 Profile Views in the last{" "}
-                <span className="bg-[linear-gradient(90deg,#d283eb,#e3b5f1)] bg-clip-text font-bold text-transparent">
+                <span className="bg-[linear-gradient(90deg,#f472b6,#fbcfe8)] bg-clip-text font-bold text-transparent">
                   7 days
                 </span>
               </h1>
-              <div className="mt-2 min-h-[300px]">
-                <V3BarChart
+              <div className="mt-2">
+                <ViewsLineChart
                   data={buckets.map((b, i) => ({ label: b.label, value: perDay[i] }))}
-                  height={320}
+                  height={300}
                 />
               </div>
             </div>
-            <div className="flex w-full min-w-0 flex-col gap-4 rounded-[15px] bg-[#111111] p-5 lg:max-w-[340px]">
+            <div className="flex w-full min-w-0 flex-col gap-4 rounded-lg border border-[#1e1e1e] bg-[#111111] p-5 lg:max-w-[340px]">
               <h1 className="m-0 text-[17px] text-[#fafafa]">
                 Visitor Devices in the last{" "}
-                <span className="bg-[linear-gradient(90deg,#d283eb,#e3b5f1)] bg-clip-text font-bold text-transparent">
+                <span className="bg-[linear-gradient(90deg,#f472b6,#fbcfe8)] bg-clip-text font-bold text-transparent">
                   7 days
                 </span>
               </h1>
@@ -254,7 +202,7 @@ export default async function OverviewPage() {
                       </div>
                       <div className="h-2.5 w-full overflow-hidden rounded-full bg-[#1b1b1b]">
                         <div
-                          className="h-full rounded-full bg-gradient-to-r from-[#9a45b2] to-[#d283eb]"
+                          className="h-full rounded-full bg-gradient-to-r from-[#db2777] to-[#f472b6]"
                           style={{ width: `${Math.round((n / deviceTotal) * 100)}%` }}
                         />
                       </div>

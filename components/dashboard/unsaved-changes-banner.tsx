@@ -74,7 +74,7 @@ export default function UnsavedChangesBanner({
 
       <div className="pointer-events-none fixed bottom-4 left-1/2 z-50 w-[min(92vw,760px)] -translate-x-1/2">
         <div
-          className="pointer-events-auto rounded-xl border border-[#1b1b1b] bg-[#0d0d0d] p-4"
+          className="pointer-events-auto rounded border border-[#222] bg-[#0d0d0d] p-4 shadow-[0_8px_40px_rgba(219,39,119,0.15)]"
           style={{
             animation: closing
               ? "unsaved-out 220ms ease-in forwards"
@@ -96,7 +96,7 @@ export default function UnsavedChangesBanner({
                 <button
                   type="button"
                   onClick={onUndo}
-                  className="inline-flex items-center justify-center rounded-md px-3 py-2 text-sm font-medium text-white/70 transition-all duration-200 hover:scale-[1.02] hover:bg-white/5 hover:text-white"
+                  className="inline-flex items-center justify-center rounded px-3 py-2 text-sm font-medium text-white/70 transition-all duration-200 hover:scale-[1.02] hover:bg-white/5 hover:text-white"
                 >
                   Undo
                 </button>
@@ -107,7 +107,7 @@ export default function UnsavedChangesBanner({
                   type="button"
                   onClick={onSave}
                   disabled={saving}
-                  className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 bg-pink-500 text-white hover:bg-pink-600 h-10 px-4 py-2 w-full md:w-auto md:min-w-[160px] mt-2 md:mt-0 gap-2 transition-colors duration-200"
+                  className="inline-flex items-center justify-center whitespace-nowrap rounded border border-pink-500/60 text-sm font-semibold ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 bg-pink-600 text-white hover:bg-pink-500 h-10 px-4 py-2 w-full md:w-auto md:min-w-[160px] mt-2 md:mt-0 gap-2 transition-colors duration-200"
                 >
                   <FontAwesomeIcon icon={faSave} className="h-4 w-4" />
                   {saving ? "Saving..." : "Save Changes"}

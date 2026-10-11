@@ -99,7 +99,7 @@ function Toggle({ checked, onChange }: { checked: boolean; onChange: (v: boolean
       aria-checked={checked}
       onClick={() => onChange(!checked)}
       className={`relative inline-flex h-[26px] w-[56px] shrink-0 cursor-pointer items-center rounded-[32px] border-2 transition-colors duration-200 ${
-        checked ? "border-[#9e52b1] bg-[#9e52b1]" : "border-[#2a2a2a] bg-[#181818] hover:border-[#3a3a3a]"
+        checked ? "border-pink-600 bg-pink-600" : "border-[#2a2a2a] bg-[#181818] hover:border-[#3a3a3a]"
       }`}
     >
       <span
@@ -112,10 +112,10 @@ function Toggle({ checked, onChange }: { checked: boolean; onChange: (v: boolean
 }
 
 const SECTION_LABEL = "ml-[5px] text-[22.5px] font-[600] text-[#bebebe]";
-const CARD = "mt-[15px] flex flex-wrap justify-around gap-[15px] rounded-[15px] bg-[#111111] p-[15px]";
+const CARD = "mt-[15px] flex flex-wrap justify-around gap-[15px] rounded-lg border border-[#1e1e1e] bg-[#111111] p-[15px]";
 const ROW = "flex w-full items-start gap-[15px] max-[900px]:flex-col";
 const FIELD_LABEL = "m-0 mb-[5.5px] ml-[3px] text-[16px] font-[500] text-[#dddddd]";
-const INPUT = "w-full rounded-[15px] border-2 border-transparent bg-[#0c0c0c] p-[10px_12px_10px_40px] text-[15px] text-[#eee] outline-none transition-[0.3s] select-text hover:border-[#191919] focus:border-[#2a2a2a]";
+const INPUT = "w-full rounded-md border-2 border-transparent bg-[#0c0c0c] p-[10px_12px_10px_40px] text-[15px] text-[#eee] outline-none transition-[0.3s] select-text hover:border-[#191919] focus:border-pink-500/60";
 const INPUT_WRAP = "relative flex w-full items-center rounded-lg";
 const INPUT_ICON = "absolute left-[8px] z-10 flex items-center text-[25px] text-[#666666]";
 
@@ -159,7 +159,7 @@ function ColorRow({
             setText(v);
             if (/^#[0-9a-fA-F]{6}$/.test(v)) onChange(v);
           }}
-          className="w-full rounded-[15px] border-2 border-transparent bg-[#0c0c0c] p-[10px_12px_10px_40px] text-[15px] tracking-[0.5px] text-[#eee] caret-[#f7f7f7] outline-none transition-[0.3s] select-text hover:border-[#191919] focus:border-[#2a2a2a]"
+          className="w-full rounded-md border-2 border-transparent bg-[#0c0c0c] p-[10px_12px_10px_40px] text-[15px] tracking-[0.5px] text-[#eee] caret-[#f7f7f7] outline-none transition-[0.3s] select-text hover:border-[#191919] focus:border-pink-500/60"
         />
       </div>
       <Modal
@@ -199,7 +199,7 @@ function AssetTile({
   return (
     <div className="flex min-w-[210px] flex-1 flex-col gap-[6px]">
       <span className="text-center text-[14px] font-[500] text-[#c9c9c9]">{label}</span>
-      <div className="relative overflow-hidden rounded-[15px] border-2 border-[#202020] bg-[#0d0d0d]">
+      <div className="relative overflow-hidden rounded-lg border-2 border-[#202020] bg-[#0d0d0d]">
         <div onClick={onChange} className="cursor-pointer">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src={src} alt={label} className="h-[120px] w-full object-cover" />
@@ -226,7 +226,7 @@ function UploadBox({
       <button
         type="button"
         onClick={onClick}
-        className="relative flex min-h-[120px] w-full cursor-pointer flex-col items-center justify-center overflow-hidden rounded-[15px] border-2 border-[#202020] bg-[#0d0d0d] p-[16px] transition-[0.2s] hover:border-[#2e2e2e] hover:bg-[#101010] active:translate-y-[2px]"
+        className="relative flex min-h-[120px] w-full cursor-pointer flex-col items-center justify-center overflow-hidden rounded-lg border-2 border-[#202020] bg-[#0d0d0d] p-[16px] transition-[0.2s] hover:border-[#2e2e2e] hover:bg-[#101010] active:translate-y-[2px]"
       >
         <div className="flex flex-col items-center gap-[8px]">
           <Icon svg={icon} className="text-[30px] text-[#8a8a8a]" />
@@ -277,6 +277,7 @@ export default function CustomizeClient({
   const [viewsPosition, setViewsPosition] = useState(initial.viewsPosition);
   const [showFeedback, setShowFeedback] = useState(initial.showFeedback);
   const [layout, setLayout] = useState(initial.layout);
+  const [customActive, setCustomActive] = useState(initial.customActive);
 
   const [avatarDialog, setAvatarDialog] = useState(false);
   const [backgroundDialog, setBackgroundDialog] = useState(false);
@@ -333,7 +334,8 @@ export default function CustomizeClient({
     setGlowEnabled(initial.glowEnabled);
     setUsernameGlow(initial.usernameGlow);
     setLayout(initial.layout);
-  }, [initial.glowEnabled, initial.usernameGlow, initial.layout]);
+    setCustomActive(initial.customActive);
+  }, [initial.glowEnabled, initial.usernameGlow, initial.layout, initial.customActive]);
 
   async function save() {
     setSaving(true);
@@ -388,10 +390,6 @@ export default function CustomizeClient({
   }
 
   async function saveLayout() {
-    if (initial.customActive) {
-      router.push("/dashboard/customize/edit");
-      return;
-    }
     setSaving(true);
     try {
       const res = await fetch("/api/profile", {
@@ -404,8 +402,9 @@ export default function CustomizeClient({
         throw new Error(data?.error ?? "Could not save.");
       }
       setLayout("halo");
+      setCustomActive(false);
       setBaseline((b) => ({ ...b, layout: "halo" }));
-      pushToast("Layout saved — it is live on your profile!");
+      pushToast("Halo layout restored — it is live on your profile!");
       router.refresh();
     } catch (e) {
       pushToast(e instanceof Error ? e.message : "Could not save.");
@@ -456,7 +455,7 @@ export default function CustomizeClient({
           {cursorUrl ? (
             <div className="flex min-w-[210px] flex-1 flex-col gap-[6px]">
               <span className="text-center text-[14px] font-[500] text-[#c9c9c9]">Custom Cursor</span>
-              <div className="group relative rounded-[15px] border-2 border-[#202020] bg-[#0d0d0d]">
+              <div className="group relative rounded-lg border-2 border-[#202020] bg-[#0d0d0d]">
                 <div onClick={() => setCursorDialog(true)} className="flex min-h-[120px] cursor-pointer flex-col items-center justify-center p-[16px]">
                   <span className="w-full truncate px-8 text-center text-[12px] text-[#8a8a8a]">
                     {cursorUrl}
@@ -474,7 +473,7 @@ export default function CustomizeClient({
           )}
           <a href="/dashboard/customize/tracks" className="flex min-w-[210px] flex-1 flex-col gap-[6px] no-underline">
             <span className="text-center text-[14px] font-[500] text-[#c9c9c9]">Audio</span>
-            <div className="relative flex min-h-[120px] w-full cursor-pointer flex-col items-center justify-center rounded-[15px] border-2 border-[#202020] bg-[#0d0d0d] p-[16px] transition-[0.2s] hover:border-[#2e2e2e] hover:bg-[#101010] active:translate-y-[2px]">
+            <div className="relative flex min-h-[120px] w-full cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-[#202020] bg-[#0d0d0d] p-[16px] transition-[0.2s] hover:border-[#2e2e2e] hover:bg-[#101010] active:translate-y-[2px]">
               <div className="flex flex-col items-center gap-[8px]">
                 <Icon svg={iconSvg.audio} className="text-[30px] text-[#8a8a8a]" />
                 <h1 className="m-0 text-[14px] font-[500] text-[#909090]">Open audio manager</h1>
@@ -485,12 +484,13 @@ export default function CustomizeClient({
       </section>
 
       <a href="/dashboard/premium" className="no-underline">
-        <div className="mt-[15px] flex w-full cursor-pointer items-center justify-center gap-[5px] rounded-[20px] border-2 border-[#7e2c8b7c] bg-[#7e2c8b63] p-[10px_15px] text-[14.5px] font-[500] text-[#fafafa] transition-[0.2s] hover:bg-[#7e2c8b7c] active:translate-y-[2px]">
-          <span>
-            Want exclusive features? Unlock more with{" "}
-            <span className="inline-flex items-center gap-[2px] align-middle">
-              <Icon svg={iconSvg.crown} className="text-[17px]" /> Premium
-            </span>
+        <div className="mt-[15px] flex w-full cursor-pointer items-center gap-3 rounded-md border border-pink-500/30 bg-pink-600/10 p-3 text-white transition-[0.2s] hover:border-pink-500/50 hover:bg-pink-600/20 active:translate-y-[2px]">
+          <span className="grid size-10 shrink-0 place-content-center rounded-md bg-pink-600/25 text-pink-300">
+            <Icon svg={iconSvg.crown} className="text-[20px]" />
+          </span>
+          <span className="min-w-0 text-[14.5px] font-[600] leading-snug">
+            Want exclusive features?
+            <span className="block text-[13px] font-[500] text-white/60">Unlock more with Premium</span>
           </span>
         </div>
       </a>
@@ -618,7 +618,7 @@ export default function CustomizeClient({
               )}
               {overlayEnabled && (
                 <div className={`${INPUT_WRAP} mt-3`}>
-                  <input type="text" maxLength={60} placeholder="Click to show" value={overlayText} onChange={(e) => setOverlayText(e.target.value)} className="w-full rounded-[15px] border-2 border-transparent bg-[#0c0c0c] p-[10px_12px] text-[15px] text-[#eee] outline-none transition-[0.3s] hover:border-[#191919] focus:border-[#2a2a2a]" />
+                  <input type="text" maxLength={60} placeholder="Click to show" value={overlayText} onChange={(e) => setOverlayText(e.target.value)} className="w-full rounded-md border-2 border-transparent bg-[#0c0c0c] p-[10px_12px] text-[15px] text-[#eee] outline-none transition-[0.3s] hover:border-[#191919] focus:border-pink-500/60" />
                 </div>
               )}
             </div>
@@ -633,14 +633,14 @@ export default function CustomizeClient({
             <button
               type="button"
               onClick={() => setLayout("halo")}
-              className={`flex w-full cursor-pointer items-center gap-[10px] rounded-[15px] border-2 p-[12px] text-left transition-[0.2s] active:translate-y-[2px] ${
-                layout === "halo" && !initial.customActive
-                  ? "border-[#7e2c8b9c] bg-[#7e2c8b22]"
+              className={`flex w-full cursor-pointer items-center gap-[10px] rounded-md border-2 p-[12px] text-left transition-[0.2s] active:translate-y-[2px] ${
+                layout === "halo" && !customActive
+                  ? "border-pink-500/70 bg-pink-600/20"
                   : "border-transparent bg-[#0c0c0c] hover:border-[#2a2a2a]"
               }`}
             >
-              <span className="grid size-10 shrink-0 place-content-center rounded-[12px] bg-[#9a45b2]/20">
-                <span className="size-5 rounded-full bg-[#9a45b2]" />
+              <span className="grid size-10 shrink-0 place-content-center rounded-md bg-pink-600/20">
+                <span className="size-5 rounded-full bg-pink-500" />
               </span>
               <span className="min-w-0">
                 <span className="block text-[15px] font-[500] text-[#f0f0f0]">Halo</span>
@@ -651,17 +651,17 @@ export default function CustomizeClient({
             <button
               type="button"
               onClick={() => router.push("/dashboard/customize/edit")}
-              className={`flex w-full cursor-pointer items-center gap-[10px] rounded-[15px] border-2 p-[12px] text-left transition-[0.2s] active:translate-y-[2px] ${
-                initial.customActive
-                  ? "border-[#7e2c8b9c] bg-[#7e2c8b22]"
+              className={`flex w-full cursor-pointer items-center gap-[10px] rounded-md border-2 p-[12px] text-left transition-[0.2s] active:translate-y-[2px] ${
+                customActive
+                  ? "border-pink-500/70 bg-pink-600/20"
                   : "border-transparent bg-[#0c0c0c] hover:border-[#2a2a2a]"
               }`}
             >
-              <span className="grid size-10 shrink-0 grid-cols-2 place-content-center gap-0.5 rounded-[12px] bg-[#0c0c0c] p-2">
-                <span className="rounded-sm bg-[#9a45b2]/80" />
-                <span className="rounded-sm border border-[#9a45b2]/60" />
-                <span className="rounded-sm border border-[#9a45b2]/60" />
-                <span className="rounded-sm bg-[#9a45b2]/80" />
+              <span className="grid size-10 shrink-0 grid-cols-2 place-content-center gap-0.5 rounded-md bg-[#0c0c0c] p-2">
+                <span className="rounded-sm bg-pink-500/80" />
+                <span className="rounded-sm border border-pink-500/60" />
+                <span className="rounded-sm border border-pink-500/60" />
+                <span className="rounded-sm bg-pink-500/80" />
               </span>
               <span className="min-w-0 flex-1">
                 <span className="flex items-center gap-2 text-[15px] font-[500] text-[#f0f0f0]">
@@ -672,14 +672,14 @@ export default function CustomizeClient({
             </button>
             ) : null}
           </div>
-          {!initial.customActive && (
+          {(!customActive || layout === "halo") && (
             <button
               type="button"
               onClick={saveLayout}
               disabled={saving}
               className={`${modalPrimaryBtn} mt-3 w-full`}
             >
-              {saving ? "Saving…" : "Save Layout"}
+              {saving ? "Saving…" : customActive ? "Switch Back to Halo" : "Save Layout"}
             </button>
           )}
         </div>
@@ -706,7 +706,7 @@ export default function CustomizeClient({
                   </div>
                 </div>
                 <div
-                  className="h-[54px] w-full rounded-[15px] border-2 border-[#222]"
+                  className="h-[54px] w-full rounded-md border-2 border-[#222]"
                   style={{ background: `linear-gradient(135deg, ${gradientPrimary}, ${gradientSecondary})` }}
                 />
               </>

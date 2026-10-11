@@ -118,7 +118,7 @@ export function Section({
   children: ReactNode;
 }) {
   return (
-    <section className="overflow-hidden rounded-2xl border border-[#1b1b1b] bg-[#0d0d0d]">
+    <section className="overflow-hidden rounded-lg border border-[#1b1b1b] bg-[#0d0d0d]">
       <div className="flex items-center gap-4 border-b border-[#1b1b1b] p-6">
         <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-pink-500/10">
           <svg

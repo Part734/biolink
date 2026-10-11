@@ -116,7 +116,15 @@ async function resetDb() {
       CREATE TABLE page_views (
         id TEXT PRIMARY KEY DEFAULT gen_random_uuid()::text,
         user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-        created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW()
+        created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW(),
+        ip TEXT,
+        device TEXT,
+        country TEXT,
+        city TEXT,
+        latitude TEXT,
+        longitude TEXT,
+        referrer TEXT,
+        user_agent TEXT
       );
     `);
 

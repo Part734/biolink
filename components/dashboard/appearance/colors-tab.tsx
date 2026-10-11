@@ -521,7 +521,7 @@ export function ColorPickerField({
             />
 
             <div
-              className={`${montserrat.className} relative w-full max-w-sm transform-gpu rounded-2xl border border-white/[0.03] from-[#1a1a1a] to-[#131313] bg-gradient-to-br p-5 transition-[transform,opacity] duration-250 ease-out will-change-transform ${
+              className={`${montserrat.className} relative w-full max-w-sm transform-gpu rounded-lg border border-white/[0.03] from-[#1a1a1a] to-[#131313] bg-gradient-to-br p-5 transition-[transform,opacity] duration-250 ease-out will-change-transform ${
                 shown
                   ? "translate-y-0 scale-100 opacity-100"
                   : "translate-y-4 scale-95 opacity-0"

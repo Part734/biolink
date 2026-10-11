@@ -49,7 +49,7 @@ function Section({
   children: React.ReactNode;
 }) {
   return (
-    <section className="overflow-hidden rounded-2xl border border-[#1b1b1b] bg-[#0d0d0d]">
+    <section className="overflow-hidden rounded-lg border border-[#1b1b1b] bg-[#0d0d0d]">
       <div className="flex items-center gap-4 border-b border-[#1b1b1b] p-6">
         {icon && (
           <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-pink-500/10 text-pink-500">
@@ -179,7 +179,7 @@ function UploadBox({
   }
 
   return (
-    <div className="group rounded-2xl border border-[#1b1b1b] bg-[#0d0d0d] p-2 transition-all duration-300 ease-out hover:border-white/20 hover:bg-[#111] hover:scale-[1.01]">
+    <div className="group rounded-lg border border-[#1b1b1b] bg-[#0d0d0d] p-2 transition-all duration-300 ease-out hover:border-white/20 hover:bg-[#111] hover:scale-[1.01]">
       <div className="relative p-4 pb-2">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
@@ -899,7 +899,7 @@ export default function AdminClient({ allUsers, allBadges }: AdminClientProps) {
         </div>
       </Section>
 
-      <div className="relative z-30 overflow-hidden rounded-2xl border border-[#1b1b1b] bg-[#0d0d0d]">
+      <div className="relative z-30 overflow-hidden rounded-lg border border-[#1b1b1b] bg-[#0d0d0d]">
         <div className="border-b border-[#1b1b1b] p-4">
           <div className="relative">
             <svg
@@ -1014,7 +1014,7 @@ export default function AdminClient({ allUsers, allBadges }: AdminClientProps) {
         >
           <div
             style={animStyle(0, phase)}
-            className="relative z-40 flex items-center justify-between rounded-2xl border border-[#1b1b1b] bg-[#0d0d0d] px-6 py-5"
+            className="relative z-40 flex items-center justify-between rounded-lg border border-[#1b1b1b] bg-[#0d0d0d] px-6 py-5"
           >
             <div className="min-w-0">
               <h2 className="truncate text-2xl font-bold text-white">
@@ -1219,7 +1219,7 @@ export default function AdminClient({ allUsers, allBadges }: AdminClientProps) {
                 }
               >
                 {loadingUserBadges ? (
-                  <div className="flex items-center justify-center gap-3 rounded-2xl border border-[#1b1b1b] bg-[#0d0d0d] px-4 py-6 text-sm text-white/60">
+                  <div className="flex items-center justify-center gap-3 rounded-lg border border-[#1b1b1b] bg-[#0d0d0d] px-4 py-6 text-sm text-white/60">
                     <div className="h-4 w-4 animate-spin rounded-full border-2 border-pink-500/30 border-t-pink-500" />
                     Loading badges...
                   </div>
@@ -1241,7 +1241,7 @@ export default function AdminClient({ allUsers, allBadges }: AdminClientProps) {
                               key={badge.id}
                               type="button"
                               onClick={() => assignBadge(badge.id)}
-                              className="group rounded-2xl border border-[#1b1b1b] bg-[#0d0d0d] p-3 text-left transition-all duration-300 ease-out hover:border-white/20 hover:bg-[#111] hover:scale-[1.01]"
+                              className="group rounded-lg border border-[#1b1b1b] bg-[#0d0d0d] p-3 text-left transition-all duration-300 ease-out hover:border-white/20 hover:bg-[#111] hover:scale-[1.01]"
                             >
                               <div className="flex items-center justify-between gap-3">
                                 <div className="flex min-w-0 items-center gap-3">
@@ -1271,7 +1271,7 @@ export default function AdminClient({ allUsers, allBadges }: AdminClientProps) {
                             return (
                               <div
                                 key={badge.id}
-                                className={`group rounded-2xl border p-3 transition-all duration-300 ease-out ${
+                                className={`group rounded-lg border p-3 transition-all duration-300 ease-out ${
                                   hidden
                                     ? "border-[#1b1b1b] bg-[#0d0d0d] text-white/60 hover:border-white/20 hover:bg-[#111]"
                                     : "border-pink-400/30 bg-pink-500/10 text-pink-400 hover:border-pink-400/50 hover:bg-pink-500/15"
